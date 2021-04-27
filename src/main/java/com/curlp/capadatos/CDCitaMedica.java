@@ -30,7 +30,7 @@ public class CDCitaMedica {
         this.cn = Conexion.conectar();
         
     }
-    //Metodo para insertar una nueva consulta medica en la tabla
+    //Metodo para insertar una nueva cita medica en la tabla
     public void insertarCitaMedica(CLCitaMedica cl) throws SQLException{
         String sql = "{CALL sp_insertarCitaMedica(?,?,?,?,?,?)}";
         
@@ -51,7 +51,7 @@ public class CDCitaMedica {
         }
     
     }
-    //Metodo para actualizar la ciudad en la tabla
+    //Metodo para actualizar cita Medica en la tabla
     public void actualizarCitaMedica(CLCitaMedica cl) {
         String sql = "{CALL sp_actualizarCitaMedica(?,?,?,?,?,?)}";
         try{
