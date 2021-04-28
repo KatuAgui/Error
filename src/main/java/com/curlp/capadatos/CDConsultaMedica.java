@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +24,7 @@ public class CDConsultaMedica {
     private final Connection cn;
     PreparedStatement ps;
     ResultSet rs;
+    Statement st;
 
     public CDConsultaMedica() throws SQLException{
         this.cn = Conexion.conectar();
@@ -74,15 +78,31 @@ public class CDConsultaMedica {
         }
     }
     
-    public void mostrarConsulta(CLConsultaMedica cl) throws  SQLException{
-        String sql = "{CALL sp_mostrarConsulta()}";
+    public List<CLConsultaMedica> obtenerConsultaMedica() throws SQLException {
         
+        String sql = "{CALL sp_mostrarConsultas()}";
+        List<CLConsultaMedica> miList = null;
         try {
-            ps = cn.prepareCall(sql);
-            ps.execute();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            
+            miList = new ArrayList<>();
+            while(rs.next()) {
+                CLConsultaMedica cl = new CLConsultaMedica();
+                cl.setIdConsultasMedicas(rs.getInt("idConsultaMedica"));
+                cl.setFechaIngreso(rs.getString("fechaDeIngreso"));
+                cl.setObservaciones(rs.getString("observaciones"));
+                cl.setRecetasMedicas(rs.getString("recetasMedicas"));
+                cl.setNumeroIdentidad(rs.getString("numeroDeIdentida"));
+                cl.setIdUsuario(rs.getInt("idUsuario"));
+                miList.add(cl);
+            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         }
-    
+        return miList;
     }
+    
+    
 }
