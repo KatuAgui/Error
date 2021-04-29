@@ -17,6 +17,24 @@ public class CLCitaMedica {
     private String horaFinal;
     private String numeroIdentidad;
     private int idUsuario;
+    private String nombreUsuario;
+    private String nombrePaciente;
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getNombrePaciente() {
+        return nombrePaciente;
+    }
+
+    public void setNombrePaciente(String nombrePaciente) {
+        this.nombrePaciente = nombrePaciente;
+    }
 
     public int getIdCitaMedica() {
         return idCitaMedica;

@@ -118,12 +118,15 @@ public class CDCitaMedica {
             miLista = new ArrayList<>();
             while(rs.next()) {
                 CLCitaMedica cl = new CLCitaMedica();
+                cl.setIdCitaMedica(rs.getInt("idCitaMedica"));
                 cl.setObservaciones(rs.getString("observaciones"));
                 cl.setFecha(rs.getString("fecha"));
                 cl.setHoraInicio(rs.getString("horaInicio"));
                 cl.setHoraFinal(rs.getString("horaFinal"));
                 cl.setIdUsuario(rs.getInt("idUsuario"));
+                cl.setNombreUsuario(rs.getString("nombreUsuario"));
                 cl.setNumeroIdentidad(rs.getString("numeroIdentidad"));
+                cl.setNombrePaciente(rs.getString("nombrePaciente"));
                 miLista.add(cl);
             }
             
