@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -102,7 +104,38 @@ public class CDHistoriaClinica {
         }
     }
     
-    
-    
-    
+    //Metodo para poblar la tabla Historia Clinica
+    public List<CLHistoriaClinica> obtenerListaHistoriaClinica() throws SQLException{
+        String sql = "{CALL sp_mostrarHistoriaClinica()}";
+        List<CLHistoriaClinica> miLista = null;
+        try{
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            miLista = new ArrayList<>();
+            while(rs.next()) {
+                CLHistoriaClinica cl = new CLHistoriaClinica();
+                
+                cl.setNumeroIdentidad(rs.getString("numeroIdentidad"));
+                cl.setFechaCreacion(rs.getString("fechaCreacion"));
+                cl.setCardiobasculares(rs.getString("cardiobasculares"));
+                cl.setPulmonares(rs.getString("pulmonares"));
+                cl.setDigestivo(rs.getString("digestivo"));
+                cl.setDiavetes(rs.getString("diavetes"));
+                cl.setRenales(rs.getString("renales"));
+                cl.setQuirurgicos(rs.getString("quirurgicos"));
+                cl.setAlergicos(rs.getString("alergicos"));
+                cl.setTransfusiones(rs.getString("transfusiones"));
+                cl.setMedicamentos(rs.getString("medicamentos"));
+                cl.setObservaciones(rs.getString("Observaciones"));
+                cl.setIdUsuario(rs.getInt("idUsuario"));
+                miLista.add(cl);
+            }
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "error: "+ e.getMessage());
+        
+        }
+        return miLista;   
+    }
+       
 }
