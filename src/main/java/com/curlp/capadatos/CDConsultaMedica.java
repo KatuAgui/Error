@@ -78,7 +78,7 @@ public class CDConsultaMedica {
         }
     }
     
-    public List<CLConsultaMedica> obtenerConsultaMedica() throws SQLException {
+    public List<CLConsultaMedica> obtenerListaConsultaMedica() throws SQLException {
         
         String sql = "{CALL sp_mostrarConsultas()}";
         List<CLConsultaMedica> miList = null;
@@ -89,13 +89,36 @@ public class CDConsultaMedica {
             miList = new ArrayList<>();
             while(rs.next()) {
                 CLConsultaMedica cl = new CLConsultaMedica();
-                cl.setIdConsultasMedicas(rs.getInt("idConsultaMedica"));
-                cl.setFechaIngreso(rs.getString("fechaDeIngreso"));
+                cl.setIdConsultasMedicas(rs.getInt("idConsultasMedicas"));
+                cl.setFechaIngreso(rs.getString("fechaIngreso"));
                 cl.setObservaciones(rs.getString("observaciones"));
                 cl.setRecetasMedicas(rs.getString("recetasMedicas"));
-                cl.setNumeroIdentidad(rs.getString("numeroDeIdentida"));
+                cl.setNumeroIdentidad(rs.getString("numeroIdentidad"));
                 cl.setIdUsuario(rs.getInt("idUsuario"));
                 miList.add(cl);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+        }
+        return miList;
+    }
+    
+    public List<String> cargarComboConsultaMedica() throws SQLException {
+        
+        String sql = "{CALL sp_mostrarConsultas()}";
+        List<String> miList = null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            
+            miList = new ArrayList<>();
+            miList.add("--Seleccione--");
+            while(rs.next()) {
+                miList.add(rs.getString("fechaIngreso"));
+                miList.add(rs.getString("observaciones"));
+                miList.add(rs.getString("recetasMedicas"));
+                miList.add(rs.getString("numeroDeIdentidad"));
             }
             
         } catch (Exception e) {

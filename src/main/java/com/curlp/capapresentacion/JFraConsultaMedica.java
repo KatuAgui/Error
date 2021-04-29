@@ -5,6 +5,14 @@
  */
 package com.curlp.capapresentacion;
 
+import com.curlp.capadatos.CDConsultaMedica;
+import com.curlp.capalogica.CLConsultaMedica;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author asmodeus9563
@@ -14,10 +22,39 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     /**
      * Creates new form JFraConsultaMedica
      */
-    public JFraConsultaMedica() {
+    public JFraConsultaMedica() throws SQLException{
         initComponents();
+        poblarTablaConsultas();
+        this.setLocationRelativeTo(null);
     }
 
+    
+    private void limpiarTabla () { 
+        DefaultTableModel dtm =  (DefaultTableModel) this.jTblConsultasMedicas.getModel();
+        
+        while (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+    }
+        
+    private void poblarTablaConsultas () throws SQLException {
+        limpiarTabla();
+        CDConsultaMedica cm = new CDConsultaMedica();
+        List<CLConsultaMedica> myList = cm.obtenerListaConsultaMedica();
+        DefaultTableModel temp = (DefaultTableModel) this.jTblConsultasMedicas.getModel();
+        
+        myList.stream().map((CLConsultaMedica cd)-> {
+            Object[] fila = new Object[6];
+            fila[0] = cd.getIdConsultasMedicas();
+            fila[1] = cd.getFechaIngreso();
+            fila[2] = cd.getObservaciones();
+            fila[3] = cd.getRecetasMedicas();
+            fila[4] = cd.getNumeroIdentidad();
+            fila[5] = cd.getIdUsuario();
+            return fila;
+        }).forEachOrdered(temp::addRow);
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,22 +68,20 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTblConsultasMedicas = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jBtnMostrarConsultas = new javax.swing.JButton();
+        jBtnAgregarNuevaConsulta = new javax.swing.JButton();
+        jBtnEditarInformacion = new javax.swing.JButton();
+        jBtnEliminarConsulta = new javax.swing.JButton();
+        jBtnBusqedaFiltrada = new javax.swing.JButton();
+        jTFNumeroIdentidadBusquedaFiltrada = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(250, 195, 7));
         jPanel1.setForeground(new java.awt.Color(1, 1, 1));
 
-        jLabel1.setForeground(new java.awt.Color(13, 1, 1));
         jLabel1.setText("Consultas Medicas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -69,24 +104,25 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(254, 254, 254));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Consultas"));
 
-        jTable1.setForeground(new java.awt.Color(19, 50, 103));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblConsultasMedicas.setForeground(new java.awt.Color(19, 50, 103));
+        jTblConsultasMedicas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Numero de Identidad"
+                "Id Consulta Medica", "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Numero de Identidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTblConsultasMedicas);
+        jTblConsultasMedicas.getAccessibleContext().setAccessibleParent(jTblConsultasMedicas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,17 +144,17 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(252, 199, 7));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Controles"));
 
-        jButton1.setText("Mostrar Consultas");
+        jBtnMostrarConsultas.setText("Mostrar Consultas");
 
-        jButton2.setText("Agregar Nueva Consulta");
+        jBtnAgregarNuevaConsulta.setText("Agregar Nueva Consulta");
 
-        jButton3.setText("Actualizar Informacion");
+        jBtnEditarInformacion.setText("Editar Informacion");
 
-        jButton4.setText("Eliminar Consulta");
+        jBtnEliminarConsulta.setText("Eliminar Consulta");
 
-        jButton5.setText("Busqueda Filtrada");
+        jBtnBusqedaFiltrada.setText("Busqueda Filtrada");
 
-        jTextField1.setEnabled(false);
+        jTFNumeroIdentidadBusquedaFiltrada.setEnabled(false);
 
         jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("Numero de Identidad Para Busqeda Filtrada");
@@ -131,16 +167,16 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jBtnMostrarConsultas)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton2)
+                        .addComponent(jBtnAgregarNuevaConsulta)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton3)
+                        .addComponent(jBtnEditarInformacion)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton4)
+                        .addComponent(jBtnEliminarConsulta)
                         .addGap(50, 50, 50)
-                        .addComponent(jButton5))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnBusqedaFiltrada))
+                    .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -149,15 +185,15 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jBtnMostrarConsultas)
+                    .addComponent(jBtnAgregarNuevaConsulta)
+                    .addComponent(jBtnEditarInformacion)
+                    .addComponent(jBtnEliminarConsulta)
+                    .addComponent(jBtnBusqedaFiltrada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
 
@@ -218,24 +254,28 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFraConsultaMedica().setVisible(true);
+                try {
+                    new JFraConsultaMedica().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(JFraConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jBtnAgregarNuevaConsulta;
+    private javax.swing.JButton jBtnBusqedaFiltrada;
+    private javax.swing.JButton jBtnEditarInformacion;
+    private javax.swing.JButton jBtnEliminarConsulta;
+    private javax.swing.JButton jBtnMostrarConsultas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTFNumeroIdentidadBusquedaFiltrada;
+    private javax.swing.JTable jTblConsultasMedicas;
     // End of variables declaration//GEN-END:variables
 }
