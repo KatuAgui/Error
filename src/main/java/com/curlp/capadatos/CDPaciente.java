@@ -157,4 +157,8 @@ private final Connection cn;
         }
         return miLista;
     }    
+
+    public String autoIncrementarCiudad() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
