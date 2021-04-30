@@ -24,6 +24,7 @@ public class CLPaciente {
     private double estatura;
     private String ciudadProcedencia;
     private String email;
+    private String sexo;
     private int idSexo;
 //    private String nombresDelPaciente;
 //    private String apellidosDelPaciente;
@@ -156,6 +157,14 @@ public class CLPaciente {
         this.email = email;
     }
 
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
     public int getIdSexo() {
         return idSexo;
     }
@@ -163,6 +172,9 @@ public class CLPaciente {
     public void setIdSexo(int idSexo) {
         this.idSexo = idSexo;
     }
+
+    
+    
     
     
 }

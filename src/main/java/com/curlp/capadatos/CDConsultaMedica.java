@@ -116,30 +116,6 @@ public class CDConsultaMedica {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         }
         return miList;
-    }
-    
-    public List<String> cargarComboConsultaMedica() throws SQLException {
-        
-        String sql = "{CALL sp_mostrarConsultas()}";
-        List<String> miList = null;
-        try {
-            st = cn.createStatement();
-            rs = st.executeQuery(sql);
-            
-            miList = new ArrayList<>();
-            miList.add("--Seleccione--");
-            while(rs.next()) {
-                miList.add(rs.getString("fechaIngreso"));
-                miList.add(rs.getString("observaciones"));
-                miList.add(rs.getString("recetasMedicas"));
-                miList.add(rs.getString("numeroDeIdentidad"));
-            }
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
-        }
-        return miList;
-    }
-    
+    } 
     
 }

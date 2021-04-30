@@ -49,16 +49,17 @@ public class JFraPrincipal extends javax.swing.JFrame {
             fila[2] = cd.getSegundoNombre();
             fila[3] = cd.getPrimerApellido();
             fila[4] = cd.getSegundoApellido();
-            fila[5] = cd.getIdSexo();
-            fila[6] = cd.getAntecedentesFamiliares();
-            fila[7] = cd.getFechaNacimiento();
-            fila[8] = cd.getTipoSangre();
-            fila[9] = cd.getDireccion();
-            fila[10] = cd.getTelefonoCelular();
-            fila[11] = cd.getPeso();
-            fila[12] = cd.getEstatura();
-            fila[13] = cd.getCiudadProcedencia();
-            fila[14] = cd.getEmail();
+            fila[5] = cd.getAntecedentesFamiliares();
+            fila[6] = cd.getFechaNacimiento();
+            fila[7] = cd.getTipoSangre();
+            fila[8] = cd.getDireccion();
+            fila[9] = cd.getTelefonoCelular();
+            fila[10] = cd.getPeso();
+            fila[11] = cd.getEstatura();
+            fila[12] = cd.getCiudadProcedencia();
+            fila[13] = cd.getEmail();
+            fila[14] = cd.getSexo();
+            
             return fila;
         }).forEachOrdered(temp::addRow);
     

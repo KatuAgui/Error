@@ -115,7 +115,6 @@ private final Connection cn;
                 cl.setSegundoNombre(rs.getString("pacienteSegundoNombre"));
                 cl.setPrimerApellido(rs.getString("pacientePrimerApellido"));
                 cl.setSegundoApellido(rs.getString("pacienteSegundoApellido"));
-                cl.setIdSexo(rs.getInt("idSexo"));
                 cl.setAntecedentesFamiliares(rs.getString("pacienteAntecedentesFamiliares"));
                 cl.setFechaNacimiento(rs.getString("pacienteFechaNacimiento"));
                 cl.setTipoSangre(rs.getString("pacienteTipoSangre"));
@@ -125,6 +124,7 @@ private final Connection cn;
                 cl.setEstatura(rs.getDouble("pacienteEstatura"));
                 cl.setCiudadProcedencia(rs.getString("pacienteCiudadProcedencia"));
                 cl.setEmail(rs.getString("pacienteEmail"));
+                cl.setSexo(rs.getString("sexo"));
                 miLista.add(cl);
             }
             
