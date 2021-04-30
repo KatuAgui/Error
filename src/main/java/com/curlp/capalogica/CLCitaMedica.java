@@ -18,7 +18,16 @@ public class CLCitaMedica {
     private String numeroIdentidad;
     private int idUsuario;
     private String nombreUsuario;
+    private String nombreEmpleado;
     private String nombrePaciente;
+
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -91,6 +100,10 @@ public class CLCitaMedica {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    
+
+   
     
     
     

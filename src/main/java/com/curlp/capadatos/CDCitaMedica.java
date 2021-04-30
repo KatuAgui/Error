@@ -119,14 +119,15 @@ public class CDCitaMedica {
             while(rs.next()) {
                 CLCitaMedica cl = new CLCitaMedica();
                 cl.setIdCitaMedica(rs.getInt("idCitaMedica"));
-                cl.setObservaciones(rs.getString("observaciones"));
-                cl.setFecha(rs.getString("fecha"));
-                cl.setHoraInicio(rs.getString("horaInicio"));
-                cl.setHoraFinal(rs.getString("horaFinal"));
+                cl.setObservaciones(rs.getString("citaMedicaObservaciones"));
+                cl.setFecha(rs.getString("citaMedicaFecha"));
+                cl.setHoraInicio(rs.getString("citaMedicaHoraInicio"));
+                cl.setHoraFinal(rs.getString("citaMedicaHoraFinal"));
                 cl.setIdUsuario(rs.getInt("idUsuario"));
                 cl.setNombreUsuario(rs.getString("nombreUsuario"));
-                cl.setNumeroIdentidad(rs.getString("numeroIdentidad"));
-                cl.setNombrePaciente(rs.getString("nombrePaciente"));
+                cl.setNombreEmpleado(rs.getString("nombreEmpleado"));
+                cl.setNumeroIdentidad(rs.getString("citaMedicaNumeroIdentidad"));
+                cl.setNombrePaciente(rs.getString("nombrepaciente"));
                 miLista.add(cl);
             }
             
@@ -137,4 +138,7 @@ public class CDCitaMedica {
         return miLista;
         
     }
+
+   
+    
 }

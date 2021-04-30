@@ -81,6 +81,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        Regresar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTblConsultasMedicas = new javax.swing.JTable();
@@ -119,21 +120,34 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("SISTEMA CLINICO SIMEC");
 
+        Regresar.setBackground(new java.awt.Color(204, 255, 204));
+        Regresar.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 12)); // NOI18N
+        Regresar.setText("<----------");
+        Regresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RegresarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8))
+                    .addComponent(Regresar))
                 .addGap(255, 255, 255)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(534, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Regresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -142,7 +156,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(79, 203, 146));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de Consultas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de Consultas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(1, 1, 1))); // NOI18N
 
         jTblConsultasMedicas.setForeground(new java.awt.Color(19, 50, 103));
         jTblConsultasMedicas.setModel(new javax.swing.table.DefaultTableModel(
@@ -182,7 +196,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(79, 203, 146));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(1, 1, 1))); // NOI18N
 
         jBtnAgregarNuevaConsulta.setText("Agregar Nueva Consulta");
 
@@ -215,18 +229,15 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jBtnEliminarConsulta)
                         .addGap(18, 18, 18)
-                        .addComponent(jBtnLimpiarControles)
-                        .addContainerGap(142, Short.MAX_VALUE))
+                        .addComponent(jBtnLimpiarControles))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBtnBuscar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBtnActivarBusqedaFiltrada))
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnActivarBusqedaFiltrada))
+                    .addComponent(jLabel2))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +259,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(79, 203, 146));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos Para Rellenar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos Para Rellenar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(1, 1, 1))); // NOI18N
 
         jTextField4.setActionCommand("<Not Set>");
 
@@ -361,6 +372,17 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void RegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegresarMouseClicked
+        try {
+            JFraPrincipal principal = new JFraPrincipal();
+            principal.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraHistoriaClinica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        this.dispose();
+    }//GEN-LAST:event_RegresarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -401,6 +423,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Regresar;
     private javax.swing.JButton jBtnActivarBusqedaFiltrada;
     private javax.swing.JButton jBtnAgregarNuevaConsulta;
     private javax.swing.JButton jBtnBuscar;

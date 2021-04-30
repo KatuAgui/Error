@@ -102,7 +102,7 @@ private final Connection cn;
     
  //Metodo para poblar tabla
     public List<CLPaciente> obtenerListaPaciente() throws SQLException{
-        String sql = "{CALL sp_mostrarPaciente()}";
+        String sql = "{CALL sp_mostrarPacientes()}";
         List<CLPaciente> miLista = null;
         try{
             st = cn.createStatement();
@@ -111,20 +111,20 @@ private final Connection cn;
             while(rs.next()) {
                 CLPaciente cl = new CLPaciente();
                 cl.setNumeroIdentidad(rs.getString("numeroIdentidad"));
-                cl.setPrimerNombre(rs.getString("primerNombre"));
-                cl.setSegundoNombre(rs.getString(rs.getString("segundoNombre")));
-                cl.setPrimerApellido(rs.getString("primerApellido"));
-                cl.setSegundoApellido(rs.getString(rs.getString("segundoApellido")));
-                cl.setAntecedentesFamiliares(rs.getNString("antecedentesFamiliares"));
-                cl.setFechaNacimiento(rs.getString("fechaNacimiento"));
-                cl.setTipoSangre(rs.getString("tipoSangre"));
-                cl.setDireccion(rs.getString("direccion"));
-                cl.setTelefonoCelular(rs.getString("telefonoCelular"));
-                cl.setPeso(rs.getDouble("peso"));
-                cl.setEstatura(rs.getDouble("estatura"));
-                cl.setCiudadProcedencia(rs.getString("ciudadProcedencia"));
-                cl.setEmail(rs.getString("email"));
+                cl.setPrimerNombre(rs.getString("pacientePrimerNombre"));
+                cl.setSegundoNombre(rs.getString("pacienteSegundoNombre"));
+                cl.setPrimerApellido(rs.getString("pacientePrimerApellido"));
+                cl.setSegundoApellido(rs.getString("pacienteSegundoApellido"));
                 cl.setIdSexo(rs.getInt("idSexo"));
+                cl.setAntecedentesFamiliares(rs.getString("pacienteAntecedentesFamiliares"));
+                cl.setFechaNacimiento(rs.getString("pacienteFechaNacimiento"));
+                cl.setTipoSangre(rs.getString("pacienteTipoSangre"));
+                cl.setDireccion(rs.getString("pacienteDireccion"));
+                cl.setTelefonoCelular(rs.getString("pacienteTelefonoCelular"));
+                cl.setPeso(rs.getDouble("pacientePeso"));
+                cl.setEstatura(rs.getDouble("pacienteEstatura"));
+                cl.setCiudadProcedencia(rs.getString("pacienteCiudadProcedencia"));
+                cl.setEmail(rs.getString("pacienteEmail"));
                 miLista.add(cl);
             }
             

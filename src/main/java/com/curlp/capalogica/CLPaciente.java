@@ -25,6 +25,24 @@ public class CLPaciente {
     private String ciudadProcedencia;
     private String email;
     private int idSexo;
+//    private String nombresDelPaciente;
+//    private String apellidosDelPaciente;
+
+//    public String getNombresDelPaciente() {
+//        return nombresDelPaciente;
+//    }
+//
+//    public void setNombresDelPaciente(String nombresDelPaciente) {
+//        this.nombresDelPaciente = nombresDelPaciente;
+//    }
+//
+//    public String getApellidosDelPaciente() {
+//        return apellidosDelPaciente;
+//    }
+//
+//    public void setApellidosDelPaciente(String apellidosDelPaciente) {
+//        this.apellidosDelPaciente = apellidosDelPaciente;
+//    }
 
     public String getNumeroIdentidad() {
         return numeroIdentidad;
