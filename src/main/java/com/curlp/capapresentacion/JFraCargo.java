@@ -401,9 +401,7 @@ public class JFraCargo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel6.getAccessibleContext().setAccessibleName("Cargos Actuales dentro de la Clinica");
-
-        jPanel4.setBackground(new java.awt.Color(79, 203, 146));
+        jPanel4.setBackground(new java.awt.Color(79, 198, 203));
 
         jLabel1.setFont(new java.awt.Font("Miriam Mono CLM", 1, 48)); // NOI18N
         jLabel1.setText("SISTEMA CLINICO SIMEC");
@@ -438,12 +436,12 @@ public class JFraCargo extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel9)
                         .addGap(0, 27, Short.MAX_VALUE)))
                 .addContainerGap())
