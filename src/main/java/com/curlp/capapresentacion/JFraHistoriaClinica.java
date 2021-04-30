@@ -93,7 +93,7 @@ public class JFraHistoriaClinica extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(252, 199, 7));
+        jPanel3.setBackground(new java.awt.Color(79, 198, 203));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
