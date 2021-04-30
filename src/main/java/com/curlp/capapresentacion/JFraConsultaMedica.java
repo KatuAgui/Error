@@ -44,13 +44,27 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         DefaultTableModel temp = (DefaultTableModel) this.jTblConsultasMedicas.getModel();
         
         myList.stream().map((CLConsultaMedica cd)-> {
-            Object[] fila = new Object[6];
+            Object[] fila = new Object[20];
             fila[0] = cd.getIdConsultasMedicas();
-            fila[1] = cd.getFechaIngreso();
-            fila[2] = cd.getObservaciones();
-            fila[3] = cd.getRecetasMedicas();
-            fila[4] = cd.getNumeroIdentidad();
-            fila[5] = cd.getIdUsuario();
+            fila[1] = cd.getNumeroIdentidad();
+            fila[2] = cd.getPrimerNombre();
+            fila[3] = cd.getSegundoNombre();
+            fila[4] = cd.getPrimerApellido();
+            fila[5] = cd.getSegundoApellido();
+            fila[6] = cd.getAntecentesFamiliares();
+            fila[7] = cd.getDireccion();
+            fila[8] = cd.getTelefonoCelular();
+            fila[9] = cd.getPeso();
+            fila[10] = cd.getEstatura();
+            fila[11] = cd.getSexo();
+            fila[12] = cd.getFechaIngreso();
+            fila[13] = cd.getObservaciones();
+            fila[14] = cd.getRecetasMedicas();
+            fila[15] = cd.getNombreUsuario();
+            fila[16] = cd.getUsuarioPrimerNombre(); 
+            fila[17] = cd.getUsuarioPrimerApellido();
+            fila[18] = cd.getCargo();
+            fila[19] = cd.getIdUsuario();
             return fila;
         }).forEachOrdered(temp::addRow);
     
@@ -110,11 +124,11 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Consulta Medica", "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Numero de Identidad"
+                "Id Consulta Medica", "Numero Identidad", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Antecedentes Familiares", "Direccion", "Telefono Celular", "Peso", "Estatura", "Sexo", "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Usuario", "1er Nombre Usuario", "1er Apellido Usuario", "Cargo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -178,7 +192,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                         .addComponent(jBtnBusqedaFiltrada))
                     .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(369, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

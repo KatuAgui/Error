@@ -130,12 +130,26 @@
                   <Color blue="67" green="32" red="13" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="0">
+                  <Table columnCount="19" rowCount="0">
                     <Column editable="false" title="Id Consulta Medica" type="java.lang.Object"/>
+                    <Column editable="false" title="Numero Identidad" type="java.lang.Object"/>
+                    <Column editable="false" title="Primer Nombre" type="java.lang.Object"/>
+                    <Column editable="false" title="Segundo Nombre" type="java.lang.Object"/>
+                    <Column editable="false" title="Primer Apellido" type="java.lang.Object"/>
+                    <Column editable="false" title="Segundo Apellido" type="java.lang.Object"/>
+                    <Column editable="false" title="Antecedentes Familiares" type="java.lang.Object"/>
+                    <Column editable="false" title="Direccion" type="java.lang.Object"/>
+                    <Column editable="false" title="Telefono Celular" type="java.lang.Object"/>
+                    <Column editable="false" title="Peso" type="java.lang.Object"/>
+                    <Column editable="false" title="Estatura" type="java.lang.Object"/>
+                    <Column editable="false" title="Sexo" type="java.lang.Object"/>
                     <Column editable="false" title="Fecha de Ingreso" type="java.lang.Object"/>
                     <Column editable="false" title="Observaciones" type="java.lang.Object"/>
                     <Column editable="false" title="Recetas Medicas" type="java.lang.Object"/>
-                    <Column editable="false" title="Numero de Identidad" type="java.lang.Object"/>
+                    <Column editable="false" title="Usuario" type="java.lang.Object"/>
+                    <Column editable="false" title="1er Nombre Usuario" type="java.lang.Object"/>
+                    <Column editable="false" title="1er Apellido Usuario" type="java.lang.Object"/>
+                    <Column editable="false" title="Cargo" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
@@ -181,7 +195,7 @@
                       <Component id="jTFNumeroIdentidadBusquedaFiltrada" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="369" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

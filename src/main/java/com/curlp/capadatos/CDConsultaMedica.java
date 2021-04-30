@@ -73,7 +73,7 @@ public class CDConsultaMedica {
             ps = cn.prepareCall(sql);
             ps.setString(1, cl.getNumeroIdentidad());
             ps.execute();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         }
     }
@@ -90,15 +90,29 @@ public class CDConsultaMedica {
             while(rs.next()) {
                 CLConsultaMedica cl = new CLConsultaMedica();
                 cl.setIdConsultasMedicas(rs.getInt("idConsultasMedicas"));
-                cl.setFechaIngreso(rs.getString("fechaIngreso"));
-                cl.setObservaciones(rs.getString("observaciones"));
-                cl.setRecetasMedicas(rs.getString("recetasMedicas"));
                 cl.setNumeroIdentidad(rs.getString("numeroIdentidad"));
+                cl.setPrimerNombre(rs.getString("pacientePrimerNombre"));
+                cl.setSegundoNombre(rs.getString("pacienteSegundoNombre"));
+                cl.setPrimerApellido(rs.getString("pacientePrimerApellido"));
+                cl.setSegundoApellido(rs.getString("pacienteSegundoApellido"));
+                cl.setAntecentesFamiliares(rs.getString("pacienteAntecedentesFamiliares"));
+                cl.setDireccion(rs.getString("pacienteDireccion"));
+                cl.setTelefonoCelular(rs.getString("pacienteTelefonoCelular"));
+                cl.setPeso(rs.getFloat("pacientePeso"));
+                cl.setEstatura(rs.getFloat("pacienteEstatura"));
+                cl.setSexo(rs.getString("sexo"));
+                cl.setFechaIngreso(rs.getString("consultaMedicaFechaIngreso"));
+                cl.setObservaciones(rs.getString("consultaMedicaObservaciones"));
+                cl.setRecetasMedicas(rs.getString("consultaMedicaRecetasMedicas"));
+                cl.setUsuarioPrimerNombre(rs.getString("empleadoPrimerNombre"));
+                cl.setUsuarioPrimerApellido(rs.getString("empleadoPrimerApellido"));
+                cl.setNombreUsuario(rs.getString("usuarioNombreUsuario"));
+                cl.setCargo(rs.getString("cargo"));
                 cl.setIdUsuario(rs.getInt("idUsuario"));
                 miList.add(cl);
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         }
         return miList;
@@ -121,7 +135,7 @@ public class CDConsultaMedica {
                 miList.add(rs.getString("numeroDeIdentidad"));
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         }
         return miList;
