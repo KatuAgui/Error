@@ -75,7 +75,7 @@ public class CDCargo {
     
     }
     // Metodo para autoincrementar id cargo
-    public int autoIncrementarCitaId() throws SQLException{
+    public int autoIncrementarCargoId() throws SQLException{
         int idCargo = 0;
         String sql = "{CALL sp_autoIncrementarCargoId()}";
         try{
@@ -139,6 +139,10 @@ public class CDCargo {
         }
         return miLista;
     }
+    //Metodo para insertar un nueva cargo en la tabla
+    
+
+   
     
     
 
