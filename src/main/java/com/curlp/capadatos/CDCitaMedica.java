@@ -110,7 +110,7 @@ public class CDCitaMedica {
     }
     //Metodo para poblar tabla
     public List<CLCitaMedica> obtenerListaCitaMedica() throws SQLException{
-        String sql = "{CALL sp_mostrarCitaMedica()}";
+        String sql = "{CALL sp_mostrarCitaMedic()}";
         List<CLCitaMedica> miLista = null;
         try{
             st = cn.createStatement();

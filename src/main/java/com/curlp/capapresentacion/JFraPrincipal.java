@@ -49,16 +49,21 @@ public class JFraPrincipal extends javax.swing.JFrame {
             fila[2] = cd.getSegundoNombre();
             fila[3] = cd.getPrimerApellido();
             fila[4] = cd.getSegundoApellido();
-            fila[5] = cd.getAntecedentesFamiliares();
-            fila[6] = cd.getFechaNacimiento();
-            fila[7] = cd.getTipoSangre();
-            fila[8] = cd.getDireccion();
-            fila[9] = cd.getTelefonoCelular();
-            fila[10] = cd.getPeso();
-            fila[11] = cd.getEstatura();
-            fila[12] = cd.getCiudadProcedencia();
-            fila[13] = cd.getEmail();
-            fila[14] = cd.getSexo();
+            fila[5] = cd.getSexo();
+            fila[6] = cd.getAntecedentesFamiliares();
+            fila[7] = cd.getFechaNacimiento();
+            fila[8] = cd.getTipoSangre();
+            fila[9] = cd.getDireccion();
+            fila[10] = cd.getTelefonoCelular();
+            fila[11] = cd.getPeso();
+            fila[12] = cd.getEstatura();
+            fila[13] = cd.getCiudadProcedencia();
+            fila[14] = cd.getEmail();
+            
+
+
+
+            
             
             return fila;
         }).forEachOrdered(temp::addRow);
@@ -242,10 +247,51 @@ public class JFraPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Numero de Identidad", "Nombre Paciente", "Apellidos de paciente", "sexo", "Antecedentes Familiares", "Tipo sangre", "Direccion", "Telefono", "Peso", "Estatura", "Lugar de procedencia", "Email"
+                "Numero de Identidad", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Sexo", "Antecedentes Familiares", "Fecha de Nacimiento", "Tipo de Sangre", "Direccion ", "Telefono Celular", "Peso", "Estatura", "Ciudad de Procedencia", "Email"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTblPacientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(jTblPacientes);
+        if (jTblPacientes.getColumnModel().getColumnCount() > 0) {
+            jTblPacientes.getColumnModel().getColumn(0).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(0).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(1).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(2).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(3).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(4).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(4).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(5).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(6).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(6).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(7).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(7).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(8).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(8).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(9).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(9).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(10).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(10).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(11).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(11).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(12).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(12).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(13).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(13).setPreferredWidth(200);
+            jTblPacientes.getColumnModel().getColumn(14).setResizable(false);
+            jTblPacientes.getColumnModel().getColumn(14).setPreferredWidth(200);
+        }
 
         jTextField1.setBackground(new java.awt.Color(153, 153, 255));
         jTextField1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
@@ -279,7 +325,8 @@ public class JFraPrincipal extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -301,10 +348,11 @@ public class JFraPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

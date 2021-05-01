@@ -29,6 +29,7 @@ public class JFraCitaMedica extends javax.swing.JFrame {
     public JFraCitaMedica() throws SQLException {
         initComponents();
         encontrarCorrelativo();
+        poblarTablaCitas();
         this.setLocationRelativeTo(null);
         
     }
@@ -54,7 +55,7 @@ public class JFraCitaMedica extends javax.swing.JFrame {
             fila[2] = cd.getFecha();
             fila[3] = cd.getHoraInicio();
             fila[4] = cd.getHoraFinal();
-            fila[5] = cd.getIdUsuario();
+            fila[5] = cd.getHoraFinal();
             fila[6] = cd.getNombreUsuario();
             fila[7] = cd.getNombreEmpleado();
             fila[8] = cd.getNumeroIdentidad();
@@ -530,13 +531,42 @@ public class JFraCitaMedica extends javax.swing.JFrame {
             new String [] {
                 "Id Cita Medica", "Observaciones", "Fecha", "Hora Inicio", "Hora Final", "Id Usuario", "Nombre Usuario", "Nombre del empleado", "Numero de identidad", "Nombre del paciente"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTblCitaMedica.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTblCitaMedica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTblCitaMedicaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTblCitaMedica);
+        if (jTblCitaMedica.getColumnModel().getColumnCount() > 0) {
+            jTblCitaMedica.getColumnModel().getColumn(0).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(0).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(1).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(2).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(3).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(4).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(4).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(5).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(6).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(6).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(7).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(7).setPreferredWidth(200);
+            jTblCitaMedica.getColumnModel().getColumn(8).setResizable(false);
+            jTblCitaMedica.getColumnModel().getColumn(9).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
