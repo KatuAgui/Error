@@ -54,7 +54,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         this.jTFNumeroIdentidad.setText(null);
         this.jTFObservaciones.setText(null);
         this.jTFRecetasMedicas.setText(null);
-        this.jCBIngresadoPorUsuario.setSelectedIndex(0);
+        this.jTFIngresadoPor.setText(null);
     }
         
     private void poblarTablaConsultas () throws SQLException {
@@ -64,7 +64,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         DefaultTableModel temp = (DefaultTableModel) this.jTblConsultasMedicas.getModel();
         
         myList.stream().map((CLConsultaMedica cd)-> {
-            Object[] fila = new Object[18];
+            Object[] fila = new Object[19];
             fila[0] = cd.getNumeroIdentidad();
             fila[1] = cd.getPrimerNombre();
             fila[2] = cd.getSegundoNombre();
@@ -83,60 +83,58 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
             fila[15] = cd.getUsuarioPrimerNombre(); 
             fila[16] = cd.getUsuarioPrimerApellido();
             fila[17] = cd.getCargo();
+            fila[18] = cd.getIdUsuario();
             return fila;
         }).forEachOrdered(temp::addRow);
     
     }
     
-    private void habilitarCamposRellenar (boolean FechaIngreso,boolean Observaciones,boolean RecetasMedicas,boolean NumeroIdentidad,boolean IngresadorPor,boolean Limpiar) {
-        this.jTFFechaIngreso.setEnabled(FechaIngreso);
-        this.jTFObservaciones.setEnabled(Observaciones);
-        this.jTFRecetasMedicas.setEnabled(RecetasMedicas);
-        this.jTFNumeroIdentidad.setEnabled(NumeroIdentidad);
-        this.jCBIngresadoPorUsuario.setEnabled(IngresadorPor);
-        this.jBtnLimpiarCampos.setEnabled(Limpiar);
-        
-        
-    }
-    
-    private void habilitarBotonesControles(boolean AgregarnNuevaConsulta, boolean EditarConsulta, boolean EliminarConsulta, boolean Limpiar, boolean Buscar, boolean NumeroIdentidaBuscar,boolean ok){
-        this.jBtnAgregarNuevaConsulta.setEnabled(AgregarnNuevaConsulta);
-        this.jBtnEditarConsulta.setEnabled(EditarConsulta);
-        this.jBtnEliminarConsulta.setEnabled(EliminarConsulta);
-        this.jBtnLimpiarControles.setEnabled(Limpiar);
-        this.jBtnBuscar.setEnabled(Buscar);
-        this.jBtnOk.setEnabled(ok) ;
-        this.jTFNumeroIdentidadBusquedaFiltrada.setEnabled(NumeroIdentidaBuscar);
+    private void busquedaFiltrada() throws SQLException{
+        limpiarTabla();
+        CDConsultaMedica cdcm = new CDConsultaMedica();
+        CLConsultaMedica cl = new CLConsultaMedica();
+         try {
+
+            cl.setNumeroIdentidad(this.jTFNumeroIdentidadBusquedaFiltrada.getText().trim());
+            cdcm.obtenerListaConsultaMedicaX();
+            poblarTablaConsultas();
+            
+            JOptionPane.showMessageDialog(null, "Encontrado Exitosamente ", "SIMEC",1);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al buscar el registro: " + ex);
+
+        }
         
     }
     
     private boolean validarTFFechaIngreso(){
         boolean estado;
-        estado = !this.jTFFechaIngreso.getText().equals("");
+        estado = this.jTFFechaIngreso.getText().equals("");
         return estado;
     }
     
     private boolean validarTFObservaciones(){
         boolean estado;
-        estado = !this.jTFObservaciones.getText().equals("");
+        estado = this.jTFObservaciones.getText().equals("");
         return estado;
     }
     
     private boolean validarTFRecetasMedicas(){
         boolean estado;
-        estado = !this.jTFRecetasMedicas.getText().equals("");
+        estado = this.jTFRecetasMedicas.getText().equals("");
         return estado;
     }
     
     private boolean validarTFNumeroIdentidad(){
         boolean estado;
-        estado = !this.jTFNumeroIdentidad.getText().equals("");
+        estado = this.jTFNumeroIdentidad.getText().equals("");
         return estado;
     }
     
-    private boolean validarCBIngresadoPor(){
+    private boolean validarTFIngresadoPor(){
         boolean estado;
-        estado = !this.jCBIngresadoPorUsuario.getSelectedItem().equals("--Seleccione--");
+        estado = this.jTFIngresadoPor.getText().equals("");
         return estado;
     }
     
@@ -153,9 +151,9 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         }else if (validarTFNumeroIdentidad()){
             JOptionPane.showMessageDialog(null, "Debe ingresar el Numero de Identidad","SIMEC",1);
             this.jTFNumeroIdentidad.requestFocus();
-        }else if (validarCBIngresadoPor()) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el usuario que ingreso la consulta","SIMEC",1);
-            this.jCBIngresadoPorUsuario.requestFocus();
+        }else if (validarTFIngresadoPor()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el usuario que ingreso la consulta","SIMEC",1);
+            this.jTFIngresadoPor.requestFocus();    
         }else{
             try {
                 CDConsultaMedica cdcm = new CDConsultaMedica();
@@ -164,7 +162,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                 cl.setObservaciones(this.jTFObservaciones.getText().trim());
                 cl.setRecetasMedicas(this.jTFRecetasMedicas.getText().trim());
                 cl.setNumeroIdentidad(this.jTFNumeroIdentidad.getText().trim());
-                cl.setNombreUsuario(this.jCBIngresadoPorUsuario.getSelectedItem().toString());
+                cl.setIdUsuario(Integer.valueOf(this.jTFIngresadoPor.getText().trim()));
                 cdcm.insertarConsulta(cl);
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error al almacenar el registro: " + e);
@@ -176,23 +174,61 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         CDConsultaMedica cdcm = new CDConsultaMedica();
         CLConsultaMedica cl = new CLConsultaMedica();
         
-        this.jTFFechaIngreso.setText(cl.getFechaIngreso());
-        this.jTFObservaciones.setText(cl.getObservaciones());
-        this.jTFNumeroIdentidad.setText(cl.getNumeroIdentidad());
-        this.jTFRecetasMedicas.setText(cl.getRecetasMedicas());
-        this.jCBIngresadoPorUsuario.setToolTipText(cl.getNombreUsuario());
-        
         try {
-                
                 cl.setFechaIngreso(this.jTFFechaIngreso.getText().trim());
                 cl.setObservaciones(this.jTFObservaciones.getText().trim());
                 cl.setRecetasMedicas(this.jTFRecetasMedicas.getText().trim());
                 cl.setNumeroIdentidad(this.jTFNumeroIdentidad.getText().trim());
-                cl.setNombreUsuario(this.jCBIngresadoPorUsuario.getSelectedItem().toString());
+                cl.setIdUsuario(Integer.valueOf(this.jTFIngresadoPor.getText().trim()));
                 cdcm.actualizarConsulta(cl);
+                JOptionPane.showMessageDialog(null, "Actualizado exitosamente ", "SIMEC",1);
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error al almacenar el registro: " + e);
             }
+    }
+    
+    private void eliminarConsultaMedica() throws SQLException{
+        CDConsultaMedica cdcm = new CDConsultaMedica();
+        CLConsultaMedica cl = new CLConsultaMedica();
+        try {
+
+            cl.setNumeroIdentidad(this.jTFNumeroIdentidadBusquedaFiltrada.getText().trim());
+            cdcm.eliminarConsulta(cl);
+            
+            JOptionPane.showMessageDialog(null, "Eliminado exitosamente ", "Control",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al eliminar registro" + ex);
+
+        }
+    }
+    
+    private void eliminar () throws SQLException{
+        int resp = JOptionPane.showConfirmDialog(null, "Seguro que quiere eliminar","control",
+                                                 JOptionPane.YES_NO_OPTION);
+       
+        if (resp == JOptionPane.YES_OPTION) {
+            try {
+                eliminarConsultaMedica();
+                poblarTablaConsultas();
+                limpiarCamposRellenar();
+                limpiarControles();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "error " + ex);
+            }
+        }
+    }
+    
+    private void filaSelecionada (){
+        if (this.jTblConsultasMedicas.getSelectedRow() != -1){
+            this.jTFFechaIngreso.setText(String.valueOf(this.jTblConsultasMedicas.getValueAt(this.jTblConsultasMedicas.getSelectedRow(), 11)));
+            this.jTFObservaciones.setText(String.valueOf(this.jTblConsultasMedicas.getValueAt(this.jTblConsultasMedicas.getSelectedRow(), 12)));
+            this.jTFRecetasMedicas.setText(String.valueOf(this.jTblConsultasMedicas.getValueAt(this.jTblConsultasMedicas.getSelectedRow(), 13)));
+            this.jTFNumeroIdentidad.setText(String.valueOf(this.jTblConsultasMedicas.getValueAt(this.jTblConsultasMedicas.getSelectedRow(), 0)));
+            this.jTFNumeroIdentidadBusquedaFiltrada.setText(String.valueOf(this.jTblConsultasMedicas.getValueAt(this.jTblConsultasMedicas.getSelectedRow(), 0)));
+            this.jTFIngresadoPor.setText(String.valueOf(this.jTblConsultasMedicas.getValueAt(this.jTblConsultasMedicas.getSelectedRow(), 18)));
+        }
     }
 
     public JFraConsultaMedica(JButton Regresar, JButton jBtnActivarBusqedaFiltrada, JButton jBtnAgregarNuevaConsulta, JButton jBtnBuscar, JButton jBtnEditarConsulta, JButton jBtnEliminarConsulta, JButton jBtnLimpiarCampos, JButton jBtnLimpiarControles, JButton jBtnOk, JComboBox<String> jCBIngresadoPorUsuario, JLabel jLabel1, JLabel jLabel2, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JLabel jLabel6, JLabel jLabel7, JLabel jLabel8, JPanel jPanel1, JPanel jPanel2, JPanel jPanel3, JPanel jPanel4, JScrollPane jScrollPane1, JTextField jTFFechaIngreso, JTextField jTFNumeroIdentidad, JTextField jTFNumeroIdentidadBusquedaFiltrada, JTextField jTFObservaciones, JTextField jTFRecetasMedicas, JTable jTblConsultasMedicas) throws HeadlessException {
@@ -204,8 +240,6 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         this.jBtnEliminarConsulta = jBtnEliminarConsulta;
         this.jBtnLimpiarCampos = jBtnLimpiarCampos;
         this.jBtnLimpiarControles = jBtnLimpiarControles;
-        this.jBtnOk = jBtnOk;
-        this.jCBIngresadoPorUsuario = jCBIngresadoPorUsuario;
         this.jLabel1 = jLabel1;
         this.jLabel2 = jLabel2;
         this.jLabel3 = jLabel3;
@@ -231,6 +265,10 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         poblarTablaConsultas();
     }
     
+    private void editar () throws SQLException {
+        editarConsultaMedica();
+        poblarTablaConsultas();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -255,9 +293,8 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jCBIngresadoPorUsuario = new javax.swing.JComboBox<>();
         jBtnLimpiarCampos = new javax.swing.JButton();
-        jBtnOk = new javax.swing.JButton();
+        jTFIngresadoPor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jBtnAgregarNuevaConsulta = new javax.swing.JButton();
         jBtnEditarConsulta = new javax.swing.JButton();
@@ -325,14 +362,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(79, 203, 146));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar Consulta Medica", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
 
-        jTFFechaIngreso.setEnabled(false);
-
-        jTFRecetasMedicas.setEnabled(false);
-
-        jTFObservaciones.setEnabled(false);
-
         jTFNumeroIdentidad.setActionCommand("<Not Set>");
-        jTFNumeroIdentidad.setEnabled(false);
 
         jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("Fecha de Ingreso");
@@ -349,21 +379,10 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("Actualizado por: ");
 
-        jCBIngresadoPorUsuario.setEnabled(false);
-
         jBtnLimpiarCampos.setText("Limpiar");
-        jBtnLimpiarCampos.setEnabled(false);
         jBtnLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnLimpiarCamposActionPerformed(evt);
-            }
-        });
-
-        jBtnOk.setText("OK");
-        jBtnOk.setEnabled(false);
-        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOkActionPerformed(evt);
             }
         });
 
@@ -379,17 +398,17 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTFFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jCBIngresadoPorUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFIngresadoPor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jBtnLimpiarCampos)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBtnOk))
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
-                        .addGap(40, 40, 40)
+                                .addGap(89, 89, 89))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addGap(40, 40, 40)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTFRecetasMedicas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
@@ -416,11 +435,10 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                     .addComponent(jTFNumeroIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCBIngresadoPorUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnLimpiarCampos)
-                    .addComponent(jBtnOk)))
+                    .addComponent(jTFIngresadoPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel3.setBackground(new java.awt.Color(79, 203, 146));
@@ -434,8 +452,18 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         });
 
         jBtnEditarConsulta.setText("Editar Consulta");
+        jBtnEditarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarConsultaActionPerformed(evt);
+            }
+        });
 
         jBtnEliminarConsulta.setText("Eliminar Consulta");
+        jBtnEliminarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEliminarConsultaActionPerformed(evt);
+            }
+        });
 
         jBtnActivarBusqedaFiltrada.setText("Activar Busqueda Filtrada");
         jBtnActivarBusqedaFiltrada.addActionListener(new java.awt.event.ActionListener() {
@@ -451,6 +479,11 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
 
         jBtnBuscar.setText("Buscar");
         jBtnBuscar.setEnabled(false);
+        jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarActionPerformed(evt);
+            }
+        });
 
         jBtnLimpiarControles.setText("Limpiar");
         jBtnLimpiarControles.addActionListener(new java.awt.event.ActionListener() {
@@ -510,10 +543,15 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Numero Identidad", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Antecedentes Familiares", "Direccion", "Telefono Celular", "Peso", "Estatura", "Sexo", "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Nombre Usuario", "1er Nombre Usuario", "2do Nombre Usuario", "Cargo"
+                "Numero Identidad", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Antecedentes Familiares", "Direccion", "Telefono Celular", "Peso", "Estatura", "Sexo", "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Nombre Usuario", "1er Nombre Usuario", "2do Nombre Usuario", "Cargo", "Id Usuario"
             }
         ));
         jTblConsultasMedicas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTblConsultasMedicas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblConsultasMedicasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblConsultasMedicas);
         if (jTblConsultasMedicas.getColumnModel().getColumnCount() > 0) {
             jTblConsultasMedicas.getColumnModel().getColumn(0).setPreferredWidth(200);
@@ -534,6 +572,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
             jTblConsultasMedicas.getColumnModel().getColumn(15).setPreferredWidth(200);
             jTblConsultasMedicas.getColumnModel().getColumn(16).setPreferredWidth(200);
             jTblConsultasMedicas.getColumnModel().getColumn(17).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(18).setPreferredWidth(200);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -579,7 +618,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -614,19 +653,16 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     }//GEN-LAST:event_RegresarMouseClicked
 
     private void jBtnAgregarNuevaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarNuevaConsultaActionPerformed
-       habilitarCamposRellenar(true,true,true,true,true,true);
-    }//GEN-LAST:event_jBtnAgregarNuevaConsultaActionPerformed
-
-    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         try {
             guardar();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al almacenar el registro: " + ex);
+            Logger.getLogger(JFraConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnOkActionPerformed
+    }//GEN-LAST:event_jBtnAgregarNuevaConsultaActionPerformed
 
     private void jBtnActivarBusqedaFiltradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActivarBusqedaFiltradaActionPerformed
-        habilitarBotonesControles(false,false, false, true,true, true,false);
+        this.jBtnBuscar.setEnabled(true);
+        this.jTFNumeroIdentidadBusquedaFiltrada.setEnabled(true);
     }//GEN-LAST:event_jBtnActivarBusqedaFiltradaActionPerformed
 
     private void jBtnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimpiarCamposActionPerformed
@@ -636,6 +672,35 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     private void jBtnLimpiarControlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimpiarControlesActionPerformed
         limpiarControles();
     }//GEN-LAST:event_jBtnLimpiarControlesActionPerformed
+
+    private void jTblConsultasMedicasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultasMedicasMouseClicked
+        filaSelecionada();
+    }//GEN-LAST:event_jTblConsultasMedicasMouseClicked
+
+    private void jBtnEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarConsultaActionPerformed
+       
+        try {
+            editar();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnEditarConsultaActionPerformed
+
+    private void jBtnEliminarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarConsultaActionPerformed
+        try {
+            eliminar();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR" +   ex );
+        }
+    }//GEN-LAST:event_jBtnEliminarConsultaActionPerformed
+
+    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
+        try {
+            busquedaFiltrada();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -685,8 +750,6 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEliminarConsulta;
     private javax.swing.JButton jBtnLimpiarCampos;
     private javax.swing.JButton jBtnLimpiarControles;
-    private javax.swing.JButton jBtnOk;
-    private javax.swing.JComboBox<String> jCBIngresadoPorUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -702,6 +765,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFFechaIngreso;
+    private javax.swing.JTextField jTFIngresadoPor;
     private javax.swing.JTextField jTFNumeroIdentidad;
     private javax.swing.JTextField jTFNumeroIdentidadBusquedaFiltrada;
     private javax.swing.JTextField jTFObservaciones;

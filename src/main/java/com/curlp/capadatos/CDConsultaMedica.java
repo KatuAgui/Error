@@ -67,7 +67,7 @@ public class CDConsultaMedica {
     }
     
     public void eliminarConsulta(CLConsultaMedica cl) throws  SQLException{
-        String sql = "{CALL sp_eliminarConsulta(?)}";
+        String sql = "{CALL sp_eliminarConsultaMedica(?)}";
         
         try {
             ps = cn.prepareCall(sql);
@@ -90,7 +90,49 @@ public class CDConsultaMedica {
             while(rs.next()) {
                 CLConsultaMedica cl = new CLConsultaMedica();
                 cl.setIdConsultasMedicas(rs.getInt("idConsultasMedicas"));
-                cl.setNumeroIdentidad(rs.getString("numeroIdentidad"));
+                cl.setNumeroIdentidad(rs.getString("consultaMedicaNumeroIdentidad"));
+                cl.setPrimerNombre(rs.getString("pacientePrimerNombre"));
+                cl.setSegundoNombre(rs.getString("pacienteSegundoNombre"));
+                cl.setPrimerApellido(rs.getString("pacientePrimerApellido"));
+                cl.setSegundoApellido(rs.getString("pacienteSegundoApellido"));
+                cl.setAntecentesFamiliares(rs.getString("pacienteAntecedentesFamiliares"));
+                cl.setDireccion(rs.getString("pacienteDireccion"));
+                cl.setTelefonoCelular(rs.getString("pacienteTelefonoCelular"));
+                cl.setPeso(rs.getFloat("pacientePeso"));
+                cl.setEstatura(rs.getFloat("pacienteEstatura"));
+                cl.setSexo(rs.getString("sexo"));
+                cl.setFechaIngreso(rs.getString("consultaMedicaFechaIngreso"));
+                cl.setObservaciones(rs.getString("consultaMedicaObservaciones"));
+                cl.setRecetasMedicas(rs.getString("consultaMedicaRecetasMedicas"));
+                cl.setUsuarioPrimerNombre(rs.getString("empleadoPrimerNombre"));
+                cl.setUsuarioPrimerApellido(rs.getString("empleadoPrimerApellido"));
+                cl.setNombreUsuario(rs.getString("usuarioNombreUsuario"));
+                cl.setCargo(rs.getString("cargo"));
+                cl.setIdUsuario(rs.getInt("idUsuario"));
+                miList.add(cl);
+            }
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+        }
+        return miList;
+    } 
+    
+    //busqeda filtrada
+    
+    public List<CLConsultaMedica> obtenerListaConsultaMedicaX() throws SQLException {
+        
+        String sql = "{CALL sp_mostrarConsultaX(?)}";
+        List<CLConsultaMedica> miList = null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            
+            miList = new ArrayList<>();
+            while(rs.next()) {
+                CLConsultaMedica cl = new CLConsultaMedica();
+                cl.setIdConsultasMedicas(rs.getInt("idConsultasMedicas"));
+                cl.setNumeroIdentidad(rs.getString("consultaMedicaNumeroIdentidad"));
                 cl.setPrimerNombre(rs.getString("pacientePrimerNombre"));
                 cl.setSegundoNombre(rs.getString("pacienteSegundoNombre"));
                 cl.setPrimerApellido(rs.getString("pacientePrimerApellido"));

@@ -65,7 +65,7 @@ public class JFraPaciente extends javax.swing.JFrame {
             fila [11] = cl.getEstatura();
             fila [12] = cl.getCiudadProcedencia();
             fila [13] = cl.getEmail();
-            fila [14] = cl.getSexo();
+            fila [14] = cl.getIdSexo();
             return fila;
         }).forEachOrdered(temp::addRow);
     }
@@ -147,55 +147,54 @@ public class JFraPaciente extends javax.swing.JFrame {
     }
     
     }}
-//    
+  
     // Metodo para llamr el metodo de insertar paciente 
     private void guardar()throws SQLException{
-    insertarPaciente();
-    poblarTablaPaciente();
-    //habilitarBotones(true, false, false,true);
-   limpiarTextField();
-   
+        insertarPaciente();
+        poblarTablaPaciente();
+        //habilitarBotones(true, false, false,true);
+        limpiarTextField();
     }
-//    
+
     // Metodo para actualizar un registro de ela tabla paciente
     
-  private void actualizarPaciente(){
-    if (!validarTextField()){
-    JOptionPane.showMessageDialog(null, "Tiene que ingrewsar numero de identidad ","Control",
+    private void actualizarPaciente() {
+        if (!validarTextField()) {
+            JOptionPane.showMessageDialog(null, "Tiene que ingrewsar numero de identidad ", "Control",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this.jTFNumeroidentidad.requestFocus();
+        } else {
+            try {
+                CDPaciente cdc = new CDPaciente();
+                CLPaciente cl = new CLPaciente();
+
+                cl.setNumeroIdentidad(this.jTFNumeroidentidad.getText().trim());
+                cl.setPrimerNombre(this.jTFPrimernombre.getText().trim());
+                cl.setSegundoNombre(this.jTFSegundonombre.getText().trim());
+                cl.setPrimerApellido(this.jTFPrimerapellido.getText().trim());
+                cl.setSegundoApellido(this.jTFSegundoapellido.getText().trim());
+                cl.setAntecedentesFamiliares(this.jTFAntecedentes.getText().trim());
+                cl.setFechaNacimiento(this.jTFFechanacimiento.getText().trim());
+                cl.setTipoSangre(this.jTFTiposangre.getText().trim());
+                cl.setDireccion(this.jTFDireccion.getText().trim());
+                cl.setTelefonoCelular(this.jTFTelefono.getText().trim());
+                cl.setPeso(Double.parseDouble(this.jTFPeso.getText().trim()));
+                cl.setEstatura(Double.parseDouble(this.jTFEstatura.getText().trim()));
+                cl.setCiudadProcedencia(this.jTFCiudadprocedencia.getText().trim());
+                cl.setEmail(this.jTFEmail.getText().trim());
+                cl.setIdSexo(Integer.valueOf(this.jTFIdsexo.getText().trim()));
+                cdc.actualizarPaciente(cl);
+
+                JOptionPane.showMessageDialog(null, "Actualizado exitosamente ", "Control",
                         JOptionPane.INFORMATION_MESSAGE);
-       this.jTFNumeroidentidad.requestFocus();            
-        }else{
-        try{
-            CDPaciente cdc = new CDPaciente();
-            CLPaciente cl = new CLPaciente();
-            
-            cl.setNumeroIdentidad(this.jTFNumeroidentidad.getText().trim());
-            cl.setPrimerNombre(this.jTFPrimernombre.getText().trim());
-            cl.setSegundoNombre(this.jTFSegundonombre.getText().trim());
-            cl.setPrimerApellido(this.jTFPrimerapellido.getText().trim());
-            cl.setSegundoApellido(this.jTFSegundoapellido.getText().trim());
-            cl.setAntecedentesFamiliares(this.jTFAntecedentes.getText().trim());
-            cl.setFechaNacimiento(this.jTFFechanacimiento.getText().trim());
-            cl.setTipoSangre(this.jTFTiposangre.getText().trim());
-            cl.setDireccion(this.jTFDireccion.getText().trim());
-            cl.setTelefonoCelular(this.jTFTelefono.getText().trim());
-            cl.setPeso(Double.parseDouble(this.jTFPeso.getText().trim()));
-            cl.setEstatura(Double.parseDouble(this.jTFEstatura.getText().trim()));
-            cl.setCiudadProcedencia(this.jTFCiudadprocedencia.getText().trim());
-            cl.setEmail(this.jTFEmail.getText().trim());
-            cl.setIdSexo(Integer.parseInt(this.jTFIdsexo.getText().trim()));
-            cdc.actualizarPaciente(cl);
-            
-             JOptionPane.showMessageDialog(null, "Actualizado exitosamente ","Control",
-                        JOptionPane.INFORMATION_MESSAGE);
-            
-            
-        } catch(SQLException ex){
-           JOptionPane.showMessageDialog(null, "error al actualizar registro" +   ex );
-       this.jTFPrimernombre.requestFocus();  
-            
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "error al actualizar registro" + ex);
+                this.jTFPrimernombre.requestFocus();
+
+            }
+        }
     }
-    }}
 //  
      // Metodo para seleccionar  los datos de la fila y asi poder modificarlos 
      private void filaSeleccionada(){
@@ -552,13 +551,54 @@ public class JFraPaciente extends javax.swing.JFrame {
             new String [] {
                 "Numero Identidad", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Antecedentes Familiares", "Fecha de Nacimiento", "Tipo de Sangre", "Direccion", "Telefono Celular", "Peso", "Estatura", "Ciudad Procedencia", "Email", "Sexo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTblPaciente.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTblPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTblPacienteMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTblPaciente);
+        if (jTblPaciente.getColumnModel().getColumnCount() > 0) {
+            jTblPaciente.getColumnModel().getColumn(0).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(0).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(1).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(2).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(3).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(4).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(4).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(5).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(6).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(6).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(7).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(7).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(8).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(8).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(9).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(9).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(10).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(10).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(11).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(11).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(12).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(12).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(13).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(13).setPreferredWidth(200);
+            jTblPaciente.getColumnModel().getColumn(14).setResizable(false);
+            jTblPaciente.getColumnModel().getColumn(14).setPreferredWidth(200);
+        }
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel17.setText("DATOS ALMACENADOS DE PACIENTES");
@@ -645,7 +685,7 @@ public class JFraPaciente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1211, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
