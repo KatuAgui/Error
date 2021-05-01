@@ -157,114 +157,112 @@ public class JFraPaciente extends javax.swing.JFrame {
    
     }
 //    
-//    // Metodo para actualizar un registro de ela tabla paciente
-//    
-//  private void actualizarPaciente(){
-//    if (!validarTextField()){
-//    JOptionPane.showMessageDialog(null, "Tiene que ingrewsar numero de identidad ","Control",
-//                        JOptionPane.INFORMATION_MESSAGE);
-//       this.jTFNumeroidentidad.requestFocus();            
-//        }else{
-//        try{
-//            CDPaciente cdc = new CDPaciente();
-//            CLPaciente cl = new CLPaciente();
-//            
-//            cl.setNumeroIdentidad(this.jTFNumeroidentidad.getText().trim());
-//            cl.setPrimerNombre(this.jTFPrimernombre.getText().trim());
-//            cl.setSegundoNombre(this.jTFSegundonombre.getText().trim());
-//            cl.setPrimerApellido(this.jTFPrimerapellido.getText().trim());
-//            cl.setSegundoApellido(this.jTFSegundoapellido.getText().trim());
-//            cl.setAntecedentesFamiliares(this.jTFAntecedentes.getText().trim());
-//            cl.setFechaNacimiento(this.jTFFechanacimiento.getText().trim());
-//            cl.setTipoSangre(this.jTFTiposangre.getText().trim());
-//            cl.setDireccion(this.jTFDireccion.getText().trim());
-//            
-//            cl.setTelefonoCelular(this.jTFTelefono.getText().trim());
-//            cl.setPeso(Double.parseDouble(this.jTFPeso.getText().trim()));
-//            cl.setEstatura(Double.parseDouble(this.jTFEstatura.getText().trim()));
-//            cl.setCiudadProcedencia(this.jTFCiudadprocedencia.getText().trim());
-//            cl.setEmail(this.jTFEmail.getText().trim());
-//            cl.setIdSexo(Integer.parseInt(this.jTFIdsexo.getText().trim()));
-//            
-//            
-//            
-//            cdc.actualizarPaciente(cl);
-//             JOptionPane.showMessageDialog(null, "Actualizado exitosamente ","Control",
-//                        JOptionPane.INFORMATION_MESSAGE);
-//            
-//            
-//        } catch(SQLException ex){
-//           JOptionPane.showMessageDialog(null, "error al actualizar registro" +   ex );
-//       this.jTFPrimernombre.requestFocus();  
-//            
-//    }
-//    }}
+    // Metodo para actualizar un registro de ela tabla paciente
+    
+  private void actualizarPaciente(){
+    if (!validarTextField()){
+    JOptionPane.showMessageDialog(null, "Tiene que ingrewsar numero de identidad ","Control",
+                        JOptionPane.INFORMATION_MESSAGE);
+       this.jTFNumeroidentidad.requestFocus();            
+        }else{
+        try{
+            CDPaciente cdc = new CDPaciente();
+            CLPaciente cl = new CLPaciente();
+            
+            cl.setNumeroIdentidad(this.jTFNumeroidentidad.getText().trim());
+            cl.setPrimerNombre(this.jTFPrimernombre.getText().trim());
+            cl.setSegundoNombre(this.jTFSegundonombre.getText().trim());
+            cl.setPrimerApellido(this.jTFPrimerapellido.getText().trim());
+            cl.setSegundoApellido(this.jTFSegundoapellido.getText().trim());
+            cl.setAntecedentesFamiliares(this.jTFAntecedentes.getText().trim());
+            cl.setFechaNacimiento(this.jTFFechanacimiento.getText().trim());
+            cl.setTipoSangre(this.jTFTiposangre.getText().trim());
+            cl.setDireccion(this.jTFDireccion.getText().trim());
+            cl.setTelefonoCelular(this.jTFTelefono.getText().trim());
+            cl.setPeso(Double.parseDouble(this.jTFPeso.getText().trim()));
+            cl.setEstatura(Double.parseDouble(this.jTFEstatura.getText().trim()));
+            cl.setCiudadProcedencia(this.jTFCiudadprocedencia.getText().trim());
+            cl.setEmail(this.jTFEmail.getText().trim());
+            cl.setIdSexo(Integer.parseInt(this.jTFIdsexo.getText().trim()));
+            cdc.actualizarPaciente(cl);
+            
+             JOptionPane.showMessageDialog(null, "Actualizado exitosamente ","Control",
+                        JOptionPane.INFORMATION_MESSAGE);
+            
+            
+        } catch(SQLException ex){
+           JOptionPane.showMessageDialog(null, "error al actualizar registro" +   ex );
+       this.jTFPrimernombre.requestFocus();  
+            
+    }
+    }}
 //  
-//     // Metodo para seleccionar  los datos de la fila y asi poder modificarlos 
-//     private void filaSeleccionada(){
-//        if (this.jTblPaciente.getSelectedRow() != -1){
-//            this.jTFNumeroidentidad.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),0)));
-//            this.jTFPrimernombre.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),1)));
-//            this.jTFSegundonombre.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),2)));
-//            this.jTFPrimerapellido.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),3)));
-//            this.jTFSegundoapellido.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),4)));
-//            this.jTFAntecedentes.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),5)));
-//            this.jTFFechanacimiento.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),6)));
-//            this.jTFTiposangre.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),7)));
-//            this.jTFDireccion.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),8)));
-//            this.jTFTelefono.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),9)));
-//            this.jTFPeso.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),10)));
-//            this.jTFEstatura.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),11)));
-//            this.jTFCiudadprocedencia.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),12)));
-//            this.jTFEmail.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),13)));
-//            this.jTFIdsexo.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),14)));
-//        } 
-//     }
+     // Metodo para seleccionar  los datos de la fila y asi poder modificarlos 
+     private void filaSeleccionada(){
+        if (this.jTblPaciente.getSelectedRow() != -1){
+           
+            this.jTFNumeroidentidad.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),0)));
+            this.jTFPrimernombre.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),1)));
+            this.jTFSegundonombre.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),2)));
+            this.jTFPrimerapellido.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),3)));
+            this.jTFSegundoapellido.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),4)));
+            this.jTFAntecedentes.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),5)));
+            this.jTFFechanacimiento.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),6)));
+            this.jTFTiposangre.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),7)));
+            this.jTFDireccion.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),8)));
+            this.jTFTelefono.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),9)));
+            this.jTFPeso.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),10)));
+            this.jTFEstatura.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),11)));
+            this.jTFCiudadprocedencia.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),12)));
+            this.jTFEmail.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),13)));
+            this.jTFIdsexo.setText(String.valueOf(this.jTblPaciente.getValueAt(this.jTblPaciente.getSelectedRow(),14)));
+        } 
+     }
 //    
-//    // Metodo para llamar el metodo de actualizar registro de la tabla
-//    private void editar()throws SQLException{
-//    actualizarPaciente();
-//    poblarTablaPaciente();
-//    habilitarBotones(true, false, false,true);
-//   limpiarTextField();
-//   encontrarCorrelativo();
-//    } 
-//    
-//   // Metodo para eliminar
-//    private void eliminarPaciente(){
-//
-//        try {
-//            CDPaciente cdc = new CDPaciente();
-//            CLPaciente cl = new CLPaciente();
-//            cl.setNumeroIdentidad(this.jTFNumeroidentidad.getText().trim());
-//            cdc.eliminarPaciente(cl);
-//            
-//            JOptionPane.showMessageDialog(null, "Eliminado exitosamente ", "Control",
-//                    JOptionPane.INFORMATION_MESSAGE);
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "error al eliminar registro" + ex);
-//            this.jTFPrimernombre.requestFocus();
-//
-//        }
-//
-//    }
-//    private void eliminar () throws SQLException{
-//        int resp = JOptionPane.showConfirmDialog(null, "Seguro que quiere eliminar","control",
-//                                                 JOptionPane.YES_NO_OPTION);
-//       
-//        if (resp == JOptionPane.YES_OPTION) {
-//            try {
-//                eliminarPaciente();
-//                poblarTablaPaciente();
-//                habilitarBotones(true, false, false, true);
-//                limpiarTextField();
-//                encontrarCorrelativo();
-//            } catch (SQLException ex) {
-//                JOptionPane.showMessageDialog(null, "error " + ex);
-//            }
-//        }
-//    }
+    // Metodo para llamar el metodo de actualizar registro de la tabla
+    private void editar()throws SQLException{
+        actualizarPaciente();
+        poblarTablaPaciente();
+    //habilitarBotones(true, false, false,true);
+        limpiarTextField();
+   //encontrarCorrelativo();
+    } 
+    
+   // Metodo para eliminar
+    private void eliminarPaciente(){
+
+        try {
+            CDPaciente cdc = new CDPaciente();
+            CLPaciente cl = new CLPaciente();
+            cl.setNumeroIdentidad(this.jTFNumeroidentidad.getText().trim());
+            cdc.eliminarPaciente(cl);
+            
+            JOptionPane.showMessageDialog(null, "Eliminado exitosamente ", "Control",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al eliminar registro" + ex);
+            this.jTFPrimernombre.requestFocus();
+
+        }
+
+    }
+    private void eliminar () throws SQLException{
+        int resp = JOptionPane.showConfirmDialog(null, "Seguro que quiere eliminar","control",
+                                                 JOptionPane.YES_NO_OPTION);
+       
+        if (resp == JOptionPane.YES_OPTION) {
+            try {
+                eliminarPaciente();
+                poblarTablaPaciente();
+                //habilitarBotones(true, false, false, true);
+                limpiarTextField();
+                //encontrarCorrelativo();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "error " + ex);
+            }
+        }
+    }
 
     
     /**
@@ -672,28 +670,28 @@ public class JFraPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void jTblPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPacienteMouseClicked
-//    filaSeleccionada();
+        filaSeleccionada();
 //    habilitarBotones(false, true,  true, true);
     }//GEN-LAST:event_jTblPacienteMouseClicked
 
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
-//        try {
-//            editar();
-//        } catch (SQLException ex) {
-//             JOptionPane.showMessageDialog(null, "ERROR" +   ex );
-//        }
+        try {
+            editar();
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "ERROR" +   ex );
+        }
     }//GEN-LAST:event_BtnEditarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-//        try {
-//            eliminar();
-//        } catch (SQLException ex) {
-//           JOptionPane.showMessageDialog(null, "ERROR" +   ex );
-//        }
+        try {
+            eliminar();
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "ERROR" +   ex );
+        }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
-    //limpiarTextField();
+        limpiarTextField();
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void RegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegresarMouseClicked
