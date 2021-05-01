@@ -34,7 +34,7 @@ public class CDHistoriaClinica {
     //Metodo para insertar una Historia Clinica
     public void insertarHistoriaClinica (CLHistoriaClinica cl) throws SQLException {
     
-         String sql = "{CALL sp_insertarHistoriaMedica(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+         String sql = "{CALL sp_insertarHistoriaClinica(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         
         try{
             ps = cn.prepareCall(sql);
@@ -63,7 +63,7 @@ public class CDHistoriaClinica {
     //Metodo para actualizar Historia Clinica
     public void actualizarHistoriaMedica(CLHistoriaClinica cl) {
       
-       String sql = "{CALL sp_actualizarHistoriaMedica(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+       String sql = "{CALL sp_actualizarHistoriaClinica(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         
         try{
             ps = cn.prepareCall(sql);
