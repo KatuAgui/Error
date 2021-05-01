@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class Conexion {
     private static String url = "jdbc:mysql://localhost:3306/sistemaclinicooficial?zeroDateTimeBehavior=CONVERT_TO_NULL";
     private static String user = "root";
-    private static String clave = "nA6U;l.D)";
+    private static String clave = "";
     
     public static Connection conectar() throws SQLException {
         try{
