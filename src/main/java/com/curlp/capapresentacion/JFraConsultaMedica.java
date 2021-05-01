@@ -88,23 +88,26 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     
     }
     
-    private void habilitarCamposRellenar () {
-        this.jTFFechaIngreso.setEnabled(true);
-        this.jTFObservaciones.setEnabled(true);
-        this.jTFRecetasMedicas.setEnabled(true);
-        this.jTFNumeroIdentidad.setEnabled(true);
-        this.jCBIngresadoPorUsuario.setEnabled(true);
-        this.jBtnLimpiarCampos.setEnabled(true);
+    private void habilitarCamposRellenar (boolean FechaIngreso,boolean Observaciones,boolean RecetasMedicas,boolean NumeroIdentidad,boolean IngresadorPor,boolean Limpiar) {
+        this.jTFFechaIngreso.setEnabled(FechaIngreso);
+        this.jTFObservaciones.setEnabled(Observaciones);
+        this.jTFRecetasMedicas.setEnabled(RecetasMedicas);
+        this.jTFNumeroIdentidad.setEnabled(NumeroIdentidad);
+        this.jCBIngresadoPorUsuario.setEnabled(IngresadorPor);
+        this.jBtnLimpiarCampos.setEnabled(Limpiar);
+        
         
     }
     
-    private void habilitarBotonesControles(boolean AgregarnNuevaConsulta, boolean EditarConsulta, boolean EliminarConsulta, boolean Limpiar, boolean Buscar, boolean NumeroIdentidaBuscar){
+    private void habilitarBotonesControles(boolean AgregarnNuevaConsulta, boolean EditarConsulta, boolean EliminarConsulta, boolean Limpiar, boolean Buscar, boolean NumeroIdentidaBuscar,boolean ok){
         this.jBtnAgregarNuevaConsulta.setEnabled(AgregarnNuevaConsulta);
         this.jBtnEditarConsulta.setEnabled(EditarConsulta);
         this.jBtnEliminarConsulta.setEnabled(EliminarConsulta);
         this.jBtnLimpiarControles.setEnabled(Limpiar);
         this.jBtnBuscar.setEnabled(Buscar);
+        this.jBtnOk.setEnabled(ok) ;
         this.jTFNumeroIdentidadBusquedaFiltrada.setEnabled(NumeroIdentidaBuscar);
+        
     }
     
     private boolean validarTFFechaIngreso(){
@@ -167,6 +170,29 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error al almacenar el registro: " + e);
             }
         }
+    }
+    
+    private void editarConsultaMedica () throws SQLException{
+        CDConsultaMedica cdcm = new CDConsultaMedica();
+        CLConsultaMedica cl = new CLConsultaMedica();
+        
+        this.jTFFechaIngreso.setText(cl.getFechaIngreso());
+        this.jTFObservaciones.setText(cl.getObservaciones());
+        this.jTFNumeroIdentidad.setText(cl.getNumeroIdentidad());
+        this.jTFRecetasMedicas.setText(cl.getRecetasMedicas());
+        this.jCBIngresadoPorUsuario.setToolTipText(cl.getNombreUsuario());
+        
+        try {
+                
+                cl.setFechaIngreso(this.jTFFechaIngreso.getText().trim());
+                cl.setObservaciones(this.jTFObservaciones.getText().trim());
+                cl.setRecetasMedicas(this.jTFRecetasMedicas.getText().trim());
+                cl.setNumeroIdentidad(this.jTFNumeroIdentidad.getText().trim());
+                cl.setNombreUsuario(this.jCBIngresadoPorUsuario.getSelectedItem().toString());
+                cdcm.actualizarConsulta(cl);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al almacenar el registro: " + e);
+            }
     }
 
     public JFraConsultaMedica(JButton Regresar, JButton jBtnActivarBusqedaFiltrada, JButton jBtnAgregarNuevaConsulta, JButton jBtnBuscar, JButton jBtnEditarConsulta, JButton jBtnEliminarConsulta, JButton jBtnLimpiarCampos, JButton jBtnLimpiarControles, JButton jBtnOk, JComboBox<String> jCBIngresadoPorUsuario, JLabel jLabel1, JLabel jLabel2, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JLabel jLabel6, JLabel jLabel7, JLabel jLabel8, JPanel jPanel1, JPanel jPanel2, JPanel jPanel3, JPanel jPanel4, JScrollPane jScrollPane1, JTextField jTFFechaIngreso, JTextField jTFNumeroIdentidad, JTextField jTFNumeroIdentidadBusquedaFiltrada, JTextField jTFObservaciones, JTextField jTFRecetasMedicas, JTable jTblConsultasMedicas) throws HeadlessException {
@@ -297,7 +323,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(79, 203, 146));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos Para Rellenar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar Consulta Medica", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
 
         jTFFechaIngreso.setEnabled(false);
 
@@ -588,7 +614,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     }//GEN-LAST:event_RegresarMouseClicked
 
     private void jBtnAgregarNuevaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarNuevaConsultaActionPerformed
-       habilitarCamposRellenar();
+       habilitarCamposRellenar(true,true,true,true,true,true);
     }//GEN-LAST:event_jBtnAgregarNuevaConsultaActionPerformed
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
@@ -600,7 +626,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnActivarBusqedaFiltradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActivarBusqedaFiltradaActionPerformed
-        habilitarBotonesControles(false,false, false, true,true, true);
+        habilitarBotonesControles(false,false, false, true,true, true,false);
     }//GEN-LAST:event_jBtnActivarBusqedaFiltradaActionPerformed
 
     private void jBtnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimpiarCamposActionPerformed
