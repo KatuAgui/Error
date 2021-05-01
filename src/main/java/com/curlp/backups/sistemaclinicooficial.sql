@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Linux (x86_64)
 --
 -- Host: localhost    Database: sistemaclinicooficial
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	8.0.23-0ubuntu0.20.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `cargo` (
   `idCargo` int NOT NULL AUTO_INCREMENT,
   `cargo` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idCargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,18 +35,18 @@ CREATE TABLE `cargo` (
 
 LOCK TABLES `cargo` WRITE;
 /*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
-INSERT INTO `cargo` VALUES (18,'Doctor');
+INSERT INTO `cargo` VALUES (13,'INGENIERO'),(14,'RRHH'),(15,'DOCTOR'),(16,'ENFERMERA');
 /*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `citamedica`
+-- Table structure for table `citaMedica`
 --
 
-DROP TABLE IF EXISTS `citamedica`;
+DROP TABLE IF EXISTS `citaMedica`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `citamedica` (
+CREATE TABLE `citaMedica` (
   `idCitaMedica` int NOT NULL AUTO_INCREMENT,
   `citaMedicaObservaciones` text COLLATE utf8_spanish_ci NOT NULL,
   `citaMedicaFecha` date NOT NULL,
@@ -57,27 +57,26 @@ CREATE TABLE `citamedica` (
   PRIMARY KEY (`idCitaMedica`),
   KEY `fk_cita_medica_usuario1_idx` (`idUsuario`),
   CONSTRAINT `fk_cita_medica_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `citamedica`
+-- Dumping data for table `citaMedica`
 --
 
-LOCK TABLES `citamedica` WRITE;
-/*!40000 ALTER TABLE `citamedica` DISABLE KEYS */;
-INSERT INTO `citamedica` VALUES (8,'ninguna','2021-04-25','21:00:00','22:00:00','0801-2000-00733',1);
-/*!40000 ALTER TABLE `citamedica` ENABLE KEYS */;
+LOCK TABLES `citaMedica` WRITE;
+/*!40000 ALTER TABLE `citaMedica` DISABLE KEYS */;
+/*!40000 ALTER TABLE `citaMedica` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `consultamedica`
+-- Table structure for table `consultaMedica`
 --
 
-DROP TABLE IF EXISTS `consultamedica`;
+DROP TABLE IF EXISTS `consultaMedica`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `consultamedica` (
+CREATE TABLE `consultaMedica` (
   `idConsultasMedicas` int NOT NULL AUTO_INCREMENT,
   `consultaMedicaFechaIngreso` date NOT NULL,
   `consultaMedicaObservaciones` text COLLATE utf8_spanish_ci NOT NULL,
@@ -91,12 +90,13 @@ CREATE TABLE `consultamedica` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `consultamedica`
+-- Dumping data for table `consultaMedica`
 --
 
-LOCK TABLES `consultamedica` WRITE;
-/*!40000 ALTER TABLE `consultamedica` DISABLE KEYS */;
-/*!40000 ALTER TABLE `consultamedica` ENABLE KEYS */;
+LOCK TABLES `consultaMedica` WRITE;
+/*!40000 ALTER TABLE `consultaMedica` DISABLE KEYS */;
+INSERT INTO `consultaMedica` VALUES (30,'2021-07-08','ninguna','Paracetamol','1709-1995-00562',12),(31,'2021-07-08','ninguna','Azitromicina','0611-1986-00847',13);
+/*!40000 ALTER TABLE `consultaMedica` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `empleado` (
   PRIMARY KEY (`idEmpleado`),
   KEY `fk_empleados_cargo1_idx` (`idCargo`),
   KEY `fk_empleado_estado_empleado1_idx` (`idEstado`),
-  CONSTRAINT `fk_empleado_estado_empleado1` FOREIGN KEY (`idEstado`) REFERENCES `estadoempleado` (`idEstado`),
+  CONSTRAINT `fk_empleado_estado_empleado1` FOREIGN KEY (`idEstado`) REFERENCES `estadoEmpleado` (`idEstado`),
   CONSTRAINT `fk_empleados_cargo1` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idCargo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -130,18 +130,18 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'Juan','Carlos','Martinez','Mendoza','Choluteca','9898-0076',18,1);
+INSERT INTO `empleado` VALUES (10,'Pedro ','Juan','Ortez','','San Lorenzo','3348-2333',13,5),(11,'Ana ','Pastora ','Euceda','Mata','San Lorenzo','2781-0045',14,5),(12,'Claudia ','Meliza','Ortez','Euceda','España ','0000-0000',16,6);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `estadoempleado`
+-- Table structure for table `estadoEmpleado`
 --
 
-DROP TABLE IF EXISTS `estadoempleado`;
+DROP TABLE IF EXISTS `estadoEmpleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `estadoempleado` (
+CREATE TABLE `estadoEmpleado` (
   `idEstado` int NOT NULL AUTO_INCREMENT,
   `estado` varchar(9) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idEstado`),
@@ -150,23 +150,23 @@ CREATE TABLE `estadoempleado` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `estadoempleado`
+-- Dumping data for table `estadoEmpleado`
 --
 
-LOCK TABLES `estadoempleado` WRITE;
-/*!40000 ALTER TABLE `estadoempleado` DISABLE KEYS */;
-INSERT INTO `estadoempleado` VALUES (1,'Activo'),(2,'Inactivo');
-/*!40000 ALTER TABLE `estadoempleado` ENABLE KEYS */;
+LOCK TABLES `estadoEmpleado` WRITE;
+/*!40000 ALTER TABLE `estadoEmpleado` DISABLE KEYS */;
+INSERT INTO `estadoEmpleado` VALUES (5,'ACTIVO'),(6,'INACTIVO');
+/*!40000 ALTER TABLE `estadoEmpleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `historiaclinica`
+-- Table structure for table `historiaClinica`
 --
 
-DROP TABLE IF EXISTS `historiaclinica`;
+DROP TABLE IF EXISTS `historiaClinica`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `historiaclinica` (
+CREATE TABLE `historiaClinica` (
   `numeroIdentidad` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `historiaClinicaFechaCreacion` date NOT NULL,
   `historiaClinicaCardiobasculares` varchar(8) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -188,13 +188,13 @@ CREATE TABLE `historiaclinica` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `historiaclinica`
+-- Dumping data for table `historiaClinica`
 --
 
-LOCK TABLES `historiaclinica` WRITE;
-/*!40000 ALTER TABLE `historiaclinica` DISABLE KEYS */;
-INSERT INTO `historiaclinica` VALUES ('0801-2000-00733','2021-10-30','true','false','false','false','false','false','false','false','ninguno','ninguna',1);
-/*!40000 ALTER TABLE `historiaclinica` ENABLE KEYS */;
+LOCK TABLES `historiaClinica` WRITE;
+/*!40000 ALTER TABLE `historiaClinica` DISABLE KEYS */;
+INSERT INTO `historiaClinica` VALUES ('0611-1986-00847','2017-07-17','False','True','True','False','False','False','True','False','Buto Asma','Ninguna',13),('1709-1995-00562','2015-02-20','False','True','False','False','False','False','True','False','Ninguno','Ninguna',12);
+/*!40000 ALTER TABLE `historiaClinica` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -232,7 +232,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES ('0801-2000-00733','Katia','Lisbeth','Aguilar','Garcia','ninguno','1999-12-30','A+','Choluteca','9586-3008',1.50,1.65,'Tegucigapa','katy@gmail.com',2);
+INSERT INTO `paciente` VALUES ('0611-1986-00847','Mayte ','Melissa','Rivera','Carbajal','Sirrosis','1986-09-05','O+','La Lima','9998-9588',140.20,1.60,'Los Limones','',6),('1709-1995-00562','Willian ','Josue','Ortez ','Euceda','Azucar','1995-07-08','AB+','San Pedro Sula','9813-9935',210.40,1.79,'San Lorenzo','wjoe1995@live.com',5);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +257,7 @@ CREATE TABLE `sexo` (
 
 LOCK TABLES `sexo` WRITE;
 /*!40000 ALTER TABLE `sexo` DISABLE KEYS */;
-INSERT INTO `sexo` VALUES (2,'Femenino'),(1,'Masculino');
+INSERT INTO `sexo` VALUES (6,'FEMENINO'),(5,'MASCULINO');
 /*!40000 ALTER TABLE `sexo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +280,7 @@ CREATE TABLE `usuario` (
   KEY `fk_usuario_empleados1_idx` (`idEmpleado`),
   KEY `fk_usuario_estado_empleado1_idx` (`idEstado`),
   CONSTRAINT `fk_usuario_empleados1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`),
-  CONSTRAINT `fk_usuario_estado_empleado1` FOREIGN KEY (`idEstado`) REFERENCES `estadoempleado` (`idEstado`)
+  CONSTRAINT `fk_usuario_estado_empleado1` FOREIGN KEY (`idEstado`) REFERENCES `estadoEmpleado` (`idEstado`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -290,36 +290,13 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'juanCarlos','1234','2020-10-12','2022-10-12',1,1);
+INSERT INTO `usuario` VALUES (12,'portez','123556','2020-01-01','2030-09-23',5,10),(13,'apeuceda','948593','2017-03-24','2030-09-23',5,11),(14,'clortez','123423','2010-12-24','2030-09-23',6,12);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'sistemaclinicooficial'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `sp_actualizarCargo` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarCargo`(IN _cargo VARCHAR(10),
-											IN _idCargo int )
-BEGIN
-	UPDATE cargo 
-		SET cargo = _cargo
-	WHERE idCargo = _idCargo;
-    
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_actualizarCitaMedica` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -328,7 +305,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarCitaMedica`(IN _citaMedicaObservaciones text(10000), 
 									      IN _citaMedicaFecha date,
@@ -385,7 +362,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarEmpleado`(IN _idEmpleado int, 
 									   IN _empleadoPrimerNombre varchar(15),
@@ -436,19 +413,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarHistoriaClinica`(	IN _
                                                 IN _medicamentos varchar(8),
                                                 IN _observaciones varchar(500),
                                                 IN _idUsuario int,
-                                                IN _numeroIdentidad varchar(15))
+                                                IN _numeroIdentidad varchar(15)
+											)
 BEGIN
 	UPDATE historiaClinica 
-   SET 	fechaCreacion = _fechaCreacion, 
-		cardiobasculares = _cardiobasculares, 
-        pulmonares = _pulmonares, 
-        digestivo = _digestivo, 
-        diavetes = _diabetes, 
-        renales = _renales, 
-        quirurgicos = _quirurgicos, 
-        transfusiones = _transfusiones, 
-        medicamentos = _medicamentos, 
-        observaciones = _observaciones, 
+   SET 	historiaClinicaFechaCreacion = _fechaCreacion, 
+		historiaClinicaCardiobasculares = _cardiobasculares, 
+        historiaClinicaPulmonares = _pulmonares, 
+        historiaClinicaDigestivo = _digestivo, 
+        historiaClinicaDiavetes = _diabetes, 
+        historiaClinicaRenales = _renales, 
+        historiaClinicaQuirurgicos = _quirurgicos, 
+        historiaClinicaTransfusiones = _transfusiones, 
+        historiaClinicaMedicamentos = _medicamentos, 
+        historiaClinicaObservaciones = _observaciones, 
         idUsuario = _idUsuario
 	WHERE numeroIdentidad = _numeroIdentidad;
 END ;;
@@ -465,30 +443,30 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarPaciente`(IN _numeroIdentidad varchar(15),IN _pacientePrimerNombre varchar(15), 
-									IN _pacienteSegundoNombre varchar(15), IN _pacientePrimerApellido varchar(15),
-                                    IN _pacienteSegundoApellido varchar (15), IN _pacienteAntecedentesFamiliares varchar(100),
-                                    IN _pacienteFechaNacimiento date, IN _pacienteTipoSangre varchar (10), IN _pacienteDireccion varchar (75),
-                                    IN _pacienteTelefonoCelular varchar(9), IN _pacienteEPeso decimal(7,2), IN _pacienteEstatura decimal(5,2),
-                                    IN _pacienteCiudadProcedencia varchar(65), IN _pacienteEmail varchar(45),IN _idSexo int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarPaciente`(IN _numeroIdentida varchar(15),IN _primerNombre varchar(15), 
+									IN _segundoNombre varchar(15), IN _primerApellido varchar(15),
+                                    IN _segundoApellido varchar (15), IN _antecedentesFamiliares varchar(100),
+                                    IN _fechaNacimiento date, IN _tipoSangre varchar (10), IN _direccion varchar (75),
+                                    IN _telefonoCelular varchar(9), IN _peso decimal(7,2), IN _estatura decimal(5,2),
+                                    IN _ciudadProcedencia varchar(65), IN _email varchar(45),IN _idSexo int)
 BEGIN
 	UPDATE paciente
 		SET numeroIdentidad = _numeroIdentidad,
-			pacientePrimerNombre = _pacientePrimerNombre,
-            pacienteSegundoNombre = _pacienteSegundoNombre,
-            pacientePrimerApellido = _pacientePrimerApellido,
-            pacienteSegundoApellido = _pacienteSegundoApellido,
-            pacienteAntecedentesFamiliares = _pacienteAntecedentesFamiliares,
-            pacienteFechaNacimiento = _pacienteFechaNacimiento,
-            pacienteTipoSangre = _pacienteTipoSangre,
-            pacienteDireccion = _pacienteDireccion,
-			pacienteTelefonoCelular = _pacienteTelefonoCelular,
-            pacientePeso = _pacientePeso,
-            pacienteEstatura = _pacienteEstatura,
-            pacienteCiudadProcedencia = _pacienteCiudadProcedencia,
-            pacienteEmail = _pacienteEmail,
+			pacientePrimerNombre = _primerNombre,
+            pacienteSegundoNombre = _segundoNombre,
+            pacientePrimerApellido = _primerApellido,
+            pacienteSegundoApellido = _segundoApellido,
+            pacienteAntecedentesFamiliares = _antecedentesFamiliares,
+            pacienteFechaNacimiento = _fechaNacimiento,
+            pacienteTipoSangre = _tipoSangre,
+            pacienteDireccion = _direccion,
+			pacienteTelefonoCelular = _telefonoCelular,
+            pacientePeso = _peso,
+            pacienteEstatura = _estatura,
+            pacienteCiudadProcedencia = _ciudadProcedencia,
+            pacienteEmail = _email,
             idSexo = _idSexo
 			WHERE numeroIdentidad = _numeroIdentidad;
 END ;;
@@ -505,7 +483,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarUsuario`(IN _idUsuario int, 
 									   IN _usuarioNombreUsuario varchar(10),
@@ -530,26 +508,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_autoIncrementarCargoId` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_autoIncrementarCargoId`()
-BEGIN
-	SELECT MAX(LAST_INSERT_ID(idCargo)) + 1 AS idCargo
-    FROM cargo;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_autoIncrementarCitaMedicaId` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -564,6 +522,46 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_autoIncrementarCitaMedicaId`()
 BEGIN 
 	SELECT MAX(LAST_INSERT_ID(idCitaMedica)) + 1 AS idCitaMedica
     FROM citaMedica;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_autoIncrementarEmpleadoId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_autoIncrementarEmpleadoId`()
+BEGIN
+	SELECT MAX(last_insert_id(idEmpleado)) + 1 as idEmpleado
+	FROM empleados;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_autoIncrementarUsuarioId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_autoIncrementarUsuarioId`()
+BEGIN
+	SELECT MAX(last_insert_id(idUsuario)) + 1 as idUsuario
+	FROM usuario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -599,7 +597,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_eliminarCitaMedica`(IN _citaMedicaNumeroIdentidad varchar(15))
 BEGIN
@@ -767,7 +765,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarCitaMedica`(IN _citaMedicaObservaciones text(10000), 
 									      IN _citaMedicaFecha date,
@@ -813,7 +811,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarEmpleado`( IN _empleadoPrimerNombre varchar(15),
 									  IN _empleadoSegundoNombre varchar(15),
@@ -857,7 +855,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarHistoriaClinica`(	IN _fe
                                                 IN _idUsuario int                                            
 											)
 BEGIN
-	INSERT INTO historiaClinica 
+	INSERT INTO historiaclinica 
     VALUES (_fechaCreacion, _cardiobasculares, _pulmonares, _digestivo, _diabetes, _renales, _quirurgicos, _transfusiones, _medicamentos, _observaciones, _idUsuario  );
 END ;;
 DELIMITER ;
@@ -873,20 +871,20 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarPaciente`(IN _numeroIdentidad varchar(15),IN _pacientePrimerNombre varchar(15), 
-									IN _pacienteSegundoNombre varchar(15), IN _pacientePrimerApellido varchar(15),
-                                    IN _pacienteSegundoApellido varchar (15), IN _pacienteAntecedentesFamiliares varchar(100),
-                                    IN _pacienteFechaNacimiento date, IN _pacienteTipoSangre varchar (10), IN _pacienteDireccion varchar (75),
-                                    IN _pacienteTelefonoCelular varchar(9), IN _pacienteEPeso decimal(7,2), IN _pacienteEstatura decimal(5,2),
-                                    IN _pacienteCiudadProcedencia varchar(65), IN _pacienteEmail varchar(45),IN _idSexo int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarPaciente`(IN _numeroIdentida varchar(15),IN _primerNombre varchar(15), 
+									IN _segundoNombre varchar(15), IN _primerApellido varchar(15),
+                                    IN _segundoApellido varchar (15), IN _antecedentesFamiliares varchar(100),
+                                    IN _fechaNacimiento date, IN _tipoSangre varchar (10), IN _direccion varchar (75),
+                                    IN _telefonoCelular varchar(9), IN _peso decimal(7,2), IN _estatura decimal(5,2),
+                                    IN _ciudadProcedencia varchar(65), IN _email varchar(45),IN _idSexo int)
 BEGIN
-	INSERT INTO paciente(numeroIdentidad,pacientePrimerNombre,pacienteSegundoNombre,pacientePrimerApellido,pacienteSegundoApellido,pacienteFechaNacimiento,
-						pacienteAntecedentesFamiliares,pacienteTelefonoCelular,pacientePeso,pacienteEstatura,pacienteCiudadProcedencia,pacienteEmail,idSexo)
-    VALUES (_numeroIdentida, _pacientePrimerNombre, _pacienteSegundoNombre, _pacientePrimerApellido, _pacienteSegundoApellido,
-			_pacienteAntecedentesFamiliares, _pacienteFechaNacimiento, _pacienteTipoSangre, _pacienteDireccion, _pacienteTelefonoCelular,
-            _pacientePeso, _pacienteEstatura, _pacienteCiudadProcedencia, _pacienteEmail, _idSexo);
+	INSERT INTO paciente(numeroIdentidad,pacientePrimerNombre,pacienteSegundoNombre,pacientePrimerApellido,pacienteSegundoApellido,pacienteAntecedentesFamiliares,
+    pacienteFechaNacimiento,pacienteTipoSangre,pacienteDireccion,pacienteTelefonoCelular,pacientePeso,pacienteEstatura,pacienteCiudadProcedencia,pacienteEmail,idSexo)
+    VALUES (_numeroIdentida, _primerNombre, _segundoNombre, _primerApellido, _segundoApellido,
+			_antecedentesFamiliares, _fechaNacimiento, _tipoSangre, _direccion, _telefonoCelular,
+            _peso, _estatura, _ciudadProcedencia, _email, _idSexo);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -901,7 +899,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarUsuario`(  IN _usuarioNombreUsuario varchar(10),
 									  IN _usuarioPassword varchar(9),
@@ -960,7 +958,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarCitaMedica` */;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarCitaMedic` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -968,23 +966,23 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarCitaMedica`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarCitaMedic`()
 BEGIN 
-	SELECT citamedica.idCitaMedica,citamedica.citaMedicaObservaciones , citamedica.citaMedicaFecha, citamedica.citaMedicaHoraInicio, citamedica.citaMedicaHoraFinal,
-			citamedica.idUsuario,CONCAT(usuario.usuarioNombreUsuario) AS nombreUsuario, CONCAT(empleado.empleadoPrimerNombre, ' ' ,empleado.empleadoPrimerApellido) AS nombreEmpleado, 
-            citamedica.citaMedicaNumeroIdentidad,CONCAT(paciente.pacientePrimerNombre, ' ' ,paciente.pacientePrimerApellido) AS nombrepaciente
-            -- CONCAT(cargo.cargo) AS CargoDentroClinica
+	SELECT citamedica.citaMedicaObservaciones , citamedica.citaMedicaFecha, citamedica.citaMedicaHoraInicio, citamedica.citaMedicaHoraFinal,
+			CONCAT(usuario.usuarioNombreUsuario) AS nombreUsuario, CONCAT(empleado.empleadoPrimerNombre, ' ' ,empleado.empleadoPrimerApellido) AS nombreEmpleado, 
+            CONCAT(cargo.cargo) AS CargoDentroClinica, citamedica.citaMedicaNumeroIdentidad,CONCAT(paciente.pacientePrimerNombre, ' ' ,paciente.pacientePrimerApellido) AS nombrepaciente
+            
 			
     FROM citamedica INNER JOIN usuario
 					  ON citamedica.idUsuario = usuario.idUsuario
                       INNER JOIN paciente 
                       ON citamedica.citaMedicaNumeroIdentidad = paciente.numeroIdentidad
                       INNER JOIN empleado
-                      ON citamedica.idUsuario = empleado.idEmpleado;
-                      -- INNER JOIN cargo
-                      -- ON citamedica.idUsuario = cargo.idCargo;
+                      ON citamedica.idUsuario = empleado.idEmpleado
+                      INNER JOIN cargo
+                      ON citamedica.idUsuario = cargo.idCargo;
                       
                       
     
@@ -1002,7 +1000,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarCitaMedicaRangoFecha`(IN _citaMedicaFecha date , IN _citaMedicaFechaFinal date )
 BEGIN 
@@ -1089,27 +1087,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarEmpleado` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarEmpleado`(IN _idEmpleado int)
-BEGIN
-	SELECT *
-    FROM empleado
-    WHERE idEmpleado = _idEmpleado;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarEmpleados` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1130,6 +1107,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarEmpleadoX` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarEmpleadoX`(IN _idEmpleado int)
+BEGIN
+	SELECT *
+    FROM empleado
+    WHERE idEmpleado = _idEmpleado;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarHistoriaClinica` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1142,12 +1140,14 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarHistoriaClinica`()
 BEGIN
-	SELECT hc.numeroIdentidad, hc.alergicos, hc.cardiobasculares, hc.diabetes, hc.digestivo, hc.fechacreacion, hc.idUsuario, hc.medicamentos,
-		   hc.numeroIdentidad, hc.observaciones, hc.pulmonares, hc.quirurgicos, hc.renales, hc.transfusiones, 
-           CONCAT(p.primerNombre,' ',p.segundoNombre,' ',primerApellido,' ',segundoApellido ) as nombrePaciente,
-           cm.fecha, cm.idCitaMedica, cm.horaInicio,cm.horaFinal, cm.observaciones,
-           u.nombreUsuario, u.idEstado,
-           com.fechaIngreso, com.recetasMedicas, com.observaciones
+	SELECT hc.numeroIdentidad, hc.historiaClinicaAlergicos, hc.historiaClinicaCardiobasculares, hc.historiaClinicaDiabetes, 
+		   hc.historiaClinicaDigestivo, hc.historiaClinicaFechacreacion, hc.idUsuario, hc.historiaClinicaMedicamentos,
+		   hc.numeroIdentidad, hc.historiaClinicaObservaciones, hc.historiaClinicaPulmonares, hc.historiaClinicaQuirurgicos, hc.historiaClinicaRenales, 
+           hc.historiaClinicaTransfusiones, 
+           CONCAT(p.pacientePrimerNombre,' ',p.pacienteSegundoNombre,' ',pacientePrimerApellido,' ',pacienteSegundoApellido ) as nombrePaciente,
+           cm.Fecha, cm.idCitaMedica, cm.HoraInicio,cm.HoraFinal, cm.Observaciones,
+           u.usuarioNombreUsuario, u.idEstado,
+           com.consultaMedicaFechaIngreso, com.consultaMedicaRecetasMedicas, com.consultaMedicaObservaciones
     FROM historiaClinica hc INNER JOIN paciente p
 							 ON hc.numeroIdentidad = p.numeroIdentidad
                              INNER JOIN citaMedica cm
@@ -1174,21 +1174,23 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarHistoriaClinicaCondicion`(IN _numeroIdentidad VARCHAR(15))
 BEGIN
-	SELECT hc.numeroIdentidad, hc.alergicos, hc.cardiobasculares, hc.diabetes, hc.digestivo, hc.fechacreacion, hc.idUsuario, hc.medicamentos,
-		   hc.numeroIdentidad, hc.observaciones, hc.pulmonares, hc.quirurgicos, hc.renales, hc.transfusiones, 
-           CONCAT(p.primerNombre,' ',p.segundoNombre,' ',primerApellido,' ',segundoApellido ) as nombrePaciente,
-           cm.fecha, cm.idCitaMedica, cm.horaInicio,cm.horaFinal, cm.observaciones,
-           u.nombreUsuario, u.idEstado,
-           com.fechaIngreso, com.recetasMedicas, com.observaciones
+	SELECT hc.numeroIdentidad, hc.historiaClinicaAlergicos, hc.historiaClinicaCardiobasculares, hc.historiaClinicaDiabetes, 
+		   hc.historiaClinicaDigestivo, hc.historiaClinicaFechacreacion, hc.idUsuario, hc.historiaClinicaMedicamentos,
+		   hc.numeroIdentidad, hc.historiaClinicaObservaciones, hc.historiaClinicaPulmonares, hc.historiaClinicaQuirurgicos, hc.historiaClinicaRenales, 
+           hc.historiaClinicaTransfusiones, 
+           CONCAT(p.pacientePrimerNombre,' ',p.pacienteSegundoNombre,' ',pacientePrimerApellido,' ',pacienteSegundoApellido ) as nombrePaciente,
+           cm.Fecha, cm.idCitaMedica, cm.HoraInicio,cm.HoraFinal, cm.Observaciones,
+           u.usuarioNombreUsuario, u.idEstado,
+           com.consultaMedicaFechaIngreso, com.consultaMedicaRecetasMedicas, com.consultaMedicaObservaciones
     FROM historiaClinica hc INNER JOIN paciente p
 							 ON hc.numeroIdentidad = p.numeroIdentidad
                              INNER JOIN citaMedica cm
 							 ON hc.numeroIdentidad = cm.numeroIdentidad
                              INNER JOIN usuario u
 							 ON hc.idUsuario = u.idUsuario
-                             INNER JOIN consultamedica com
+                             INNER JOIN consultaMedica com
 							 ON hc.numeroIdentidad = com.numeroIdentidad
-	WHERE hc.NumeroIdentidad = _numeroIdentidad;
+	WHERE hc.numeroIdentidad = _numeroIdentidad;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1208,12 +1210,14 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarHistoriaClinicaCondicionRangoFecha`(IN _fechaIcial DATE,
 															  IN _fechaFinal DATE)
 BEGIN
-	SELECT hc.numeroIdentidad, hc.alergicos, hc.cardiobasculares, hc.diabetes, hc.digestivo, hc.fechacreacion, hc.idUsuario, hc.medicamentos,
-		   hc.numeroIdentidad, hc.observaciones, hc.pulmonares, hc.quirurgicos, hc.renales, hc.transfusiones, 
-           CONCAT(p.primerNombre,' ',p.segundoNombre,' ',primerApellido,' ',segundoApellido ) as nombrePaciente,
-           cm.fecha, cm.idCitaMedica, cm.horaInicio,cm.horaFinal, cm.observaciones,
-           u.nombreUsuario, u.idEstado,
-           com.fechaIngreso, com.recetasMedicas, com.observaciones
+	SELECT hc.numeroIdentidad, hc.historiaClinicaAlergicos, hc.historiaClinicaCardiobasculares, hc.historiaClinicaDiabetes, 
+		   hc.historiaClinicaDigestivo, hc.historiaClinicaFechaCreacion, hc.idUsuario, hc.historiaClinicaMedicamentos,
+		   hc.numeroIdentidad, hc.historiaClinicaObservaciones, hc.historiaClinicaPulmonares, hc.historiaClinicaQuirurgicos, hc.historiaClinicaRenales, 
+           hc.historiaClinicaTransfusiones, 
+           CONCAT(p.pacientePrimerNombre,' ',p.pacienteSegundoNombre,' ',pacientePrimerApellido,' ',pacienteSegundoApellido ) as nombrePaciente,
+           cm.Fecha, cm.idCitaMedica, cm.HoraInicio,cm.HoraFinal, cm.Observaciones,
+           u.usuarioNombreUsuario, u.idEstado,
+           com.consultaMedicaFechaIngreso, com.consultaMedicaRecetasMedicas, com.consultaMedicaObservaciones
     FROM historiaClinica hc INNER JOIN paciente p
 							 ON hc.numeroIdentidad = p.numeroIdentidad
                              INNER JOIN citaMedica cm
@@ -1222,7 +1226,7 @@ BEGIN
 							 ON hc.idUsuario = u.idUsuario
                              INNER JOIN consultaMedica com
 							 ON hc.numeroIdentidad = com.numeroIdentidad
-	WHERE hc.fechaCreacion BETWEEN _fechaInicial AND _fechaFinal;
+	WHERE hc.historiaClinicaFechaCreacion BETWEEN _fechaInicial AND _fechaFinal;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1237,13 +1241,12 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarPacientes`()
 BEGIN
-	SELECT paciente.numeroIdentidad,CONCAT(paciente.pacientePrimerNombre, ' ' ,paciente.pacienteSegundoNombre) AS nombresDelPaciente,
-    CONCAT(paciente.pacientePrimerApellido, ' ' ,paciente.pacienteSegundoApellido) AS apellidosDelPaciente, 
-			 sexo.sexo, paciente.pacienteAntecedentesFamiliares, paciente.pacienteTipoSangre, paciente.pacienteDireccion,
+	SELECT paciente.numeroIdentidad, paciente.pacientePrimerNombre, paciente.pacienteSegundoNombre, paciente.pacientePrimerApellido,
+			paciente.pacienteSegundoApellido, sexo.sexo, paciente.pacienteAntecedentesFamiliares,pacienteFechaNacimiento ,paciente.pacienteTipoSangre, paciente.pacienteDireccion,
             paciente.pacienteTelefonoCelular, paciente.pacientePeso, paciente.pacienteEstatura, paciente.pacienteCiudadProcedencia, paciente.pacienteEmail
     FROM paciente INNER JOIN sexo
 				  ON paciente.idSexo = sexo.idSexo;
@@ -1261,13 +1264,12 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarPacientesX`(IN _numeroIdentidad varchar(15))
 BEGIN
-	SELECT paciente.numeroIdentidad,CONCAT(paciente.pacientePrimerNombre, ' ' ,paciente.pacienteSegundoNombre) AS nombresDelPaciente,
-    CONCAT(paciente.pacientePrimerApellido, ' ' ,paciente.pacienteSegundoApellido) AS apellidosDelPaciente, 
-			 sexo.sexo, paciente.pacienteAntecedentesFamiliares, paciente.pacienteTipoSangre, paciente.pacienteDireccion,
+	SELECT paciente.numeroIdentidad, paciente.pacientePrimerNombre, paciente.pacienteSegundoNombre, paciente.pacientePrimerApellido,
+			paciente.pacienteSegundoApellido, sexo.sexo, paciente.pacienteAntecedentesFamiliares, paciente.pacienteTipoSangre, paciente.pacienteDireccion,
             paciente.pacienteTelefonoCelular, paciente.pacientePeso, paciente.pacienteEstatura, paciente.pacienteCiudadProcedencia, paciente.pacienteEmail
     FROM paciente INNER JOIN sexo
 				  ON paciente.idSexo = sexo.idSexo
@@ -1286,7 +1288,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarPorNumeroIdentidad`(IN _citaMedicaNumeroIdentidad varchar(15))
 BEGIN 
@@ -1301,27 +1303,6 @@ BEGIN
                       ON citamedica.idUsuario = empleado.idEmpleado
 	WHERE citamedica.citaMedicaNumeroIdentidad = _citaMedicaNumeroIdentidad;
     
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarUsuario` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarUsuario`(IN _IdUsuario int)
-BEGIN
-	SELECT *
-    FROM usuario
-    WHERE IdUsuario = _IdUsuario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1348,6 +1329,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_mostrarUsuarioX` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mostrarUsuarioX`(IN _IdUsuario int)
+BEGIN
+	SELECT *
+    FROM usuario
+    WHERE IdUsuario = _IdUsuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1358,4 +1360,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-30 22:23:46
+-- Dump completed on 2021-04-30 23:39:08

@@ -64,27 +64,25 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         DefaultTableModel temp = (DefaultTableModel) this.jTblConsultasMedicas.getModel();
         
         myList.stream().map((CLConsultaMedica cd)-> {
-            Object[] fila = new Object[20];
-            fila[0] = cd.getIdConsultasMedicas();
-            fila[1] = cd.getNumeroIdentidad();
-            fila[2] = cd.getPrimerNombre();
-            fila[3] = cd.getSegundoNombre();
-            fila[4] = cd.getPrimerApellido();
-            fila[5] = cd.getSegundoApellido();
-            fila[6] = cd.getAntecentesFamiliares();
-            fila[7] = cd.getDireccion();
-            fila[8] = cd.getTelefonoCelular();
-            fila[9] = cd.getPeso();
-            fila[10] = cd.getEstatura();
-            fila[11] = cd.getSexo();
-            fila[12] = cd.getFechaIngreso();
-            fila[13] = cd.getObservaciones();
-            fila[14] = cd.getRecetasMedicas();
-            fila[15] = cd.getNombreUsuario();
-            fila[16] = cd.getUsuarioPrimerNombre(); 
-            fila[17] = cd.getUsuarioPrimerApellido();
-            fila[18] = cd.getCargo();
-            fila[19] = cd.getIdUsuario();
+            Object[] fila = new Object[18];
+            fila[0] = cd.getNumeroIdentidad();
+            fila[1] = cd.getPrimerNombre();
+            fila[2] = cd.getSegundoNombre();
+            fila[3] = cd.getPrimerApellido();
+            fila[4] = cd.getSegundoApellido();
+            fila[5] = cd.getAntecentesFamiliares();
+            fila[6] = cd.getDireccion();
+            fila[7] = cd.getTelefonoCelular();
+            fila[8] = cd.getPeso();
+            fila[9] = cd.getEstatura();
+            fila[10] = cd.getSexo();
+            fila[11] = cd.getFechaIngreso();
+            fila[12] = cd.getObservaciones();
+            fila[13] = cd.getRecetasMedicas();
+            fila[14] = cd.getNombreUsuario();
+            fila[15] = cd.getUsuarioPrimerNombre(); 
+            fila[16] = cd.getUsuarioPrimerApellido();
+            fila[17] = cd.getCargo();
             return fila;
         }).forEachOrdered(temp::addRow);
     
@@ -191,7 +189,6 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         this.jLabel7 = jLabel7;
         this.jLabel8 = jLabel8;
         this.jPanel1 = jPanel1;
-        this.jPanel2 = jPanel2;
         this.jPanel3 = jPanel3;
         this.jPanel4 = jPanel4;
         this.jScrollPane1 = jScrollPane1;
@@ -217,22 +214,11 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Regresar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTblConsultasMedicas = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
-        jBtnAgregarNuevaConsulta = new javax.swing.JButton();
-        jBtnEditarConsulta = new javax.swing.JButton();
-        jBtnEliminarConsulta = new javax.swing.JButton();
-        jBtnActivarBusqedaFiltrada = new javax.swing.JButton();
-        jTFNumeroIdentidadBusquedaFiltrada = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jBtnBuscar = new javax.swing.JButton();
-        jBtnLimpiarControles = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTFFechaIngreso = new javax.swing.JTextField();
         jTFRecetasMedicas = new javax.swing.JTextField();
@@ -246,8 +232,24 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
         jCBIngresadoPorUsuario = new javax.swing.JComboBox<>();
         jBtnLimpiarCampos = new javax.swing.JButton();
         jBtnOk = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jBtnAgregarNuevaConsulta = new javax.swing.JButton();
+        jBtnEditarConsulta = new javax.swing.JButton();
+        jBtnEliminarConsulta = new javax.swing.JButton();
+        jBtnActivarBusqedaFiltrada = new javax.swing.JButton();
+        jTFNumeroIdentidadBusquedaFiltrada = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jBtnBuscar = new javax.swing.JButton();
+        jBtnLimpiarControles = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTblConsultasMedicas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1293, 633));
+
+        jPanel5.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1293, 633));
 
         jPanel1.setBackground(new java.awt.Color(79, 203, 146));
         jPanel1.setForeground(new java.awt.Color(1, 1, 1));
@@ -278,9 +280,9 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel8))
                     .addComponent(Regresar))
-                .addGap(255, 255, 255)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(154, 154, 154)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(101, 101, 101))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,125 +294,6 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
-        );
-
-        jPanel2.setBackground(new java.awt.Color(79, 203, 146));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de Consultas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
-
-        jTblConsultasMedicas.setForeground(new java.awt.Color(19, 50, 103));
-        jTblConsultasMedicas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id Consulta Medica", "Numero Identidad", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Antecedentes Familiares", "Direccion", "Telefono Celular", "Peso", "Estatura", "Sexo", "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Usuario", "1er Nombre Usuario", "1er Apellido Usuario", "Cargo"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTblConsultasMedicas);
-        jTblConsultasMedicas.getAccessibleContext().setAccessibleParent(jTblConsultasMedicas);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(79, 203, 146));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
-
-        jBtnAgregarNuevaConsulta.setText("Agregar Nueva Consulta");
-        jBtnAgregarNuevaConsulta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAgregarNuevaConsultaActionPerformed(evt);
-            }
-        });
-
-        jBtnEditarConsulta.setText("Editar Consulta");
-
-        jBtnEliminarConsulta.setText("Eliminar Consulta");
-
-        jBtnActivarBusqedaFiltrada.setText("Activar Busqueda Filtrada");
-        jBtnActivarBusqedaFiltrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnActivarBusqedaFiltradaActionPerformed(evt);
-            }
-        });
-
-        jTFNumeroIdentidadBusquedaFiltrada.setEnabled(false);
-
-        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
-        jLabel2.setText("Ingrese # de Identidad Para Buscar o Eliminar una consulta");
-
-        jBtnBuscar.setText("Buscar");
-        jBtnBuscar.setEnabled(false);
-
-        jBtnLimpiarControles.setText("Limpiar");
-        jBtnLimpiarControles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnLimpiarControlesActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jBtnAgregarNuevaConsulta)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnEditarConsulta)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnEliminarConsulta)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnLimpiarControles))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnActivarBusqedaFiltrada))
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnAgregarNuevaConsulta)
-                    .addComponent(jBtnEditarConsulta)
-                    .addComponent(jBtnEliminarConsulta)
-                    .addComponent(jBtnLimpiarControles))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnActivarBusqedaFiltrada)
-                    .addComponent(jBtnBuscar))
-                .addGap(17, 17, 17))
         );
 
         jPanel4.setBackground(new java.awt.Color(79, 203, 146));
@@ -488,7 +371,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTFNumeroIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,39 +390,186 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
                     .addComponent(jTFNumeroIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBIngresadoPorUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnLimpiarCampos)
                     .addComponent(jBtnOk)))
         );
 
+        jPanel3.setBackground(new java.awt.Color(79, 203, 146));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
+
+        jBtnAgregarNuevaConsulta.setText("Agregar Nueva Consulta");
+        jBtnAgregarNuevaConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarNuevaConsultaActionPerformed(evt);
+            }
+        });
+
+        jBtnEditarConsulta.setText("Editar Consulta");
+
+        jBtnEliminarConsulta.setText("Eliminar Consulta");
+
+        jBtnActivarBusqedaFiltrada.setText("Activar Busqueda Filtrada");
+        jBtnActivarBusqedaFiltrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnActivarBusqedaFiltradaActionPerformed(evt);
+            }
+        });
+
+        jTFNumeroIdentidadBusquedaFiltrada.setEnabled(false);
+
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
+        jLabel2.setText("Ingrese # de Identidad Para Buscar o Eliminar una consulta");
+
+        jBtnBuscar.setText("Buscar");
+        jBtnBuscar.setEnabled(false);
+
+        jBtnLimpiarControles.setText("Limpiar");
+        jBtnLimpiarControles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLimpiarControlesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jBtnAgregarNuevaConsulta)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnEditarConsulta)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnEliminarConsulta)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnLimpiarControles))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnActivarBusqedaFiltrada))
+                    .addComponent(jLabel2))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAgregarNuevaConsulta)
+                    .addComponent(jBtnEditarConsulta)
+                    .addComponent(jBtnEliminarConsulta)
+                    .addComponent(jBtnLimpiarControles))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFNumeroIdentidadBusquedaFiltrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnActivarBusqedaFiltrada)
+                    .addComponent(jBtnBuscar))
+                .addGap(17, 17, 17))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(79, 203, 146));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Consultas Medicas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(1, 1, 1))); // NOI18N
+
+        jTblConsultasMedicas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero Identidad", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Antecedentes Familiares", "Direccion", "Telefono Celular", "Peso", "Estatura", "Sexo", "Fecha de Ingreso", "Observaciones", "Recetas Medicas", "Nombre Usuario", "1er Nombre Usuario", "2do Nombre Usuario", "Cargo"
+            }
+        ));
+        jTblConsultasMedicas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane1.setViewportView(jTblConsultasMedicas);
+        if (jTblConsultasMedicas.getColumnModel().getColumnCount() > 0) {
+            jTblConsultasMedicas.getColumnModel().getColumn(0).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(4).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(6).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(7).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(8).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(9).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(10).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(11).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(12).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(13).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(14).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(15).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(16).setPreferredWidth(200);
+            jTblConsultasMedicas.getColumnModel().getColumn(17).setPreferredWidth(200);
+        }
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -643,6 +673,7 @@ public class JFraConsultaMedica extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFFechaIngreso;
     private javax.swing.JTextField jTFNumeroIdentidad;
